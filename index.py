@@ -14,8 +14,7 @@ def home():
 @app.route("/outMutuo", methods = ["POST"])
 def returnDataDetails():
 
-    # global response
-
+    print("/outMutuo")
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
     OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAPI(request_data)
@@ -27,7 +26,7 @@ def returnDataDetails():
 @app.route("/outMutuoAvg", methods = ["POST"])
 def returnDataAnno():
 
-    # global response
+    print("/outMutuoAvg")
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
@@ -40,7 +39,7 @@ def returnDataAnno():
 @app.route("/outMutuoAvgTot", methods = ["POST"])
 def returnDataAvg():
 
-    # global response
+    print("/outMutuoAvgTot")
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
@@ -53,7 +52,7 @@ def returnDataAvg():
 @app.route("/outMutuoOverview", methods = ["POST"])
 def returnDataOv():
 
-    # global response
+    print("/outMutuoOverview")
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
@@ -66,7 +65,7 @@ def returnDataOv():
 @app.route("/outSpese", methods = ["POST"])
 def returnDataSpesa():
 
-    # global response
+    print("/outSpese")
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
@@ -79,7 +78,7 @@ def returnDataSpesa():
 @app.route("/outSpeseOverview", methods = ["POST"])
 def returnDataSpesaDetails():
 
-    # global response
+    print("/outSpeseOverview")
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
