@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_restful import Api
 import json
 
-from MyFunctions import CalcolaMutuoAPI
+from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAPI
 
 app = Flask(__name__)
 api = Api(app)
@@ -63,7 +63,31 @@ def returnDataOv():
 
     return ReturnData
 
+@app.route("/outSpese", methods = ["POST"])
+def returnDataDetails():
 
+    # global response
+
+    request_data = request.data
+    request_data = json.loads(request_data.decode("utf-8"))
+    OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio = CalcolaCashIniziale(request_data)
+    dummy=1
+    ReturnData = OutputsSpeseIniziali.to_json()
+
+    return ReturnData
+
+@app.route("/outSpeseOverview", methods = ["POST"])
+def returnDataDetails():
+
+    # global response
+
+    request_data = request.data
+    request_data = json.loads(request_data.decode("utf-8"))
+    OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio = CalcolaCashIniziale(request_data)
+    dummy=1
+    ReturnData = OutputsSpeseInizialiDettaglio.to_json()
+
+    return ReturnData
 
 # if __name__ == "__main__":
 #     app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)

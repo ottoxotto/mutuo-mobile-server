@@ -126,34 +126,103 @@ def CalcolaMutuoAPI(UserData) :
     dummy=1
     return OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo
 
-def CalcolaCashIniziale(InputsSpeseIniziali, InputsCasa, InputsMutuo) :
+def CalcolaCashIniziale(UserData) :
+
+    Finanziamento = float(UserData["Prezzo Immobile"])*float(UserData["Percentuale Mutuo"])
+
+    if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<2:
+        IstruttoriaType = "percentuale"
+        Istruttoria = float(UserData["Istruttoria"])*0.01*(Finanziamento)
+    elif float(UserData["Spese di Istruttoria"])>2:
+        IstruttoriaType = "fissa"
+        Istruttoria = float(UserData["Istruttoria"])
+
+    if UserData["Tipologia Acquisto"].contains("Prima"):
+        Sostitutiva = 0.25
+        SpesaSostitutiva = Sostitutiva*Finanziamento
+        if UserData["Tipologia Acquisto"].contains("Privato"):
+            Registro = 2
+            SpesaRegistro = Registro*0.01*float(UserData["Prezzo Immobile"])
+            if SpesaRegistro <1000:
+                SpesaRegistro = 1000
+            SpesaIpotecaria = 50
+            SpesaCatastale = 50
+            IVA = 0
+            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+        elif UserData["Tipologia Acquisto"].contains("Costruttore"):
+            SpesaRegistro = 200
+            SpesaIpotecaria = 200
+            SpesaCatastale = 200
+            IVA = 4
+            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+    elif UserData["Tipologia Acquisto"].contains("Seconda"):
+        Sostitutiva = 2
+        SpesaSostitutiva = Sostitutiva*Finanziamento
+        if UserData["Tipologia Acquisto"].contains("Privato"):
+            Registro = 9
+            SpesaRegistro = Registro*0.01*float(UserData["Prezzo Immobile"])
+            if SpesaRegistro <1000:
+                SpesaRegistro = 1000
+            SpesaIpotecaria = 50
+            SpesaCatastale = 50
+            IVA = 0
+            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+        elif UserData["Tipologia Acquisto"].contains("Costruttore"):
+            SpesaRegistro = 200
+            SpesaIpotecaria = 200
+            SpesaCatastale = 200
+            if UserData["Tipologia Acquisto"].contains("Lusso"):
+                IVA = 22
+                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+            else:
+                IVA = 10
+                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+
 
     SpeseIniziali = {
-        "CostoAgenzia" : InputsSpeseIniziali["Agenzia"]*0.01*InputsCasa["Offerta"],
-        "CostoNotaio" : InputsSpeseIniziali["Notaio"],
-        "CostoIstruttoria" : InputsSpeseIniziali["Istruttoria"]*0.01*InputsCasa["Offerta"],
-        "CostoSostituitiva" : InputsSpeseIniziali["Sostituitiva"]*0.01*InputsCasa["Offerta"],
-        "CostoPerizia" : InputsSpeseIniziali["Perizia"]
+        "PrezzoImmobile €" : float(UserData["Prezzo Immobile"]),
+        "TotFinanziamento €" : Finanziamento,
+        "CostoAgenzia" : float(UserData["Percentuale Agenzia"])*0.01*float(UserData["Prezzo Immobile"]),
+        "CostoIstruttoria" : Istruttoria,
+        "CostoSostitutiva" : float(UserData["Imposta Sostitutiva"])*0.01*Finanziamento,
+        "CostoPerizia" : float(UserData["Spese di Perizia"]),
+        "CostoAssicurazioni" : float(UserData["Assicurazioni"]),
+        "CostoNotaio" : SpesaRegistro + SpesaIpotecaria + SpesaCatastale,
+        "CostoIVA" : SpesaIVA
     }
 
-    SpeseIniziali["TotCosti"] = SpeseIniziali["CostoAgenzia"] + SpeseIniziali["CostoNotaio"] + SpeseIniziali["CostoIstruttoria"] + SpeseIniziali["CostoSostituitiva"] + SpeseIniziali["CostoPerizia"]
-    SpeseIniziali["AnticipoMutuo"] = InputsCasa["Offerta"]*(100-InputsMutuo["PercFinanziata"])*0.01
+    SpeseIniziali["TotCosti"] = SpeseIniziali["CostoAgenzia"] + SpeseIniziali["CostoNotaio"] + SpeseIniziali["CostoIstruttoria"] + SpeseIniziali["CostoSostituitiva"] + SpeseIniziali["CostoPerizia"] + SpeseIniziali["CostoAssicurazioni"] + SpeseIniziali["CostoIVA"]
+    SpeseIniziali["AnticipoMutuo"] = float(UserData["Prezzo Immobile"])-Finanziamento
     SpeseIniziali["SpesaTotIniziale"] = SpeseIniziali["TotCosti"] + SpeseIniziali["AnticipoMutuo"]
     
-    
-    # CostoAgenzia = InputsSpeseIniziali["Agenzia"]*0.01*InputsCasa["Offerta"]
-    # CostoNotaio = InputsSpeseIniziali["Notaio"]
-    # CostoIstruttoria = InputsSpeseIniziali["Istruttoria"]*0.01*InputsCasa["Offerta"]
-    # CostoSostituitiva = InputsSpeseIniziali["Sostituitiva"]*0.01*InputsCasa["Offerta"]
-    # CostoPerizia = InputsSpeseIniziali["Perizia"]
-    # Costi = CostoAgenzia + CostoNotaio + CostoIstruttoria + CostoSostituitiva + CostoPerizia
-    # AnticipoMutuo = InputsCasa["Offerta"]*(100-InputsMutuo["PercFinanziata"])*0.01
-    # SpesaTotIniziale = Costi + AnticipoMutuo
+    PrezzoImmobileList = ["Prezzo Immobile €" , round(SpeseIniziali["PrezzoImmobile €"],0)]
+    TotFinanziamentoList = ["Tot. Finanziamento €" , round(SpeseIniziali["TotFinanziamento €"],0)]
+    CostoAgenziaList = ["Parcella Agenzia €" , round(SpeseIniziali["CostoAgenzia"],0)]
+    CostoIstruttoriaList = ["Spesa di Istruttoria €" , round(SpeseIniziali["CostoIstruttoria"],0)]
+    CostoSostitutivaList = ["Imposta Sostitutiva €" , round(SpeseIniziali["CostoSostitutiva"],0)]
+    CostoPeriziaList = ["Costo Perizia €" , round(SpeseIniziali["CostoPerizia"],0)]
+    CostoAssicurazioniList = ["Costo Assicurazioni €" , round(SpeseIniziali["CostoAssicurazioni"],0)]
+    CostoNotaioList = ["Costi Notarili €" , round(SpeseIniziali["CostoNotaio"],0)]
+    CostoIVAList = ["IVA €" , round(SpeseIniziali["CostoIVA"],0)]
 
-    OutputsSpeseIniziali = pd.DataFrame(data=SpeseIniziali, index=[0])
-    OutputsSpeseIniziali.round(2)
+    TipologiaAcquistoList = ["Tip. Acquisto", UserData["Tipologia Acquisto"]]
+    PercFinanziamentoList = ["Percentuale Mutuo", float(UserData["Percentuale Mutuo"])]
+    ImpostaRegistroList = ["Di cui Imposta di Registro", SpesaRegistro]
+    ImpostaIpotecariaList = ["Di cui Imposta Ipotecaria", SpesaIpotecaria]
+    ImpostaCatastaleList = ["Di cui Imposta Catastale", SpesaCatastale]
 
-    return OutputsSpeseIniziali
+
+
+
+    OutputsSpeseInizialiDettaglio = pd.DataFrame(list(zip(PrezzoImmobileList, TipologiaAcquistoList, PercFinanziamentoList, TotFinanziamentoList, CostoAgenziaList, CostoIstruttoriaList, CostoSostitutivaList, CostoPeriziaList, CostoAssicurazioniList, CostoNotaioList, ImpostaRegistroList, ImpostaIpotecariaList, ImpostaCatastaleList, CostoIVAList )),
+        columns =["Prezzo Immobile €", "Tip. Acquisto", "Percentuale Mutuo", "Tot. Finanziamento €", "Parcella Agenzia €", "Spesa di Istruttoria €", "Imposta Sostitutiva €", "Costo Perizia €", "Costo Assicurazioni €", "Costi Notarili €", "Di cui Imposta di Registro", "Di cui Imposta Ipotecaria", "Di cui Imposta Catastale", "IVA €"])
+
+    OutputsSpeseInizialiDettaglio = OutputsSpeseInizialiDettaglio.T
+
+    OutputsSpeseIniziali= pd.DataFrame(data=SpeseIniziali, index=[0])
+    OutputsSpeseIniziali.round(0)
+
+    return OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio
 
 def CalcolaIMU(InputsCasa) : 
 
