@@ -64,7 +64,7 @@ def returnDataOv():
     return ReturnData
 
 @app.route("/outSpese", methods = ["POST"])
-def returnDataDetails():
+def returnDataSpesa():
 
     # global response
 
@@ -77,7 +77,7 @@ def returnDataDetails():
     return ReturnData
 
 @app.route("/outSpeseOverview", methods = ["POST"])
-def returnDataDetails():
+def returnDataSpesaDetails():
 
     # global response
 
