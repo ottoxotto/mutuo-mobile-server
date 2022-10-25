@@ -66,7 +66,7 @@ def returnDataOv():
 def returnDataSpesa():
 
     print("/outSpese")
-
+    print("HERE")
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
     OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio = CalcolaCashIniziale(request_data)
