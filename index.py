@@ -73,7 +73,7 @@ def returnDataSpesa():
     dummy=1
     ReturnData = OutputsSpeseIniziali.to_json()
 
-    return ReturnData
+    return "ReturnData"
 
 @app.route("/outSpeseOverview", methods = ["POST"])
 def returnDataSpesaDetails():
