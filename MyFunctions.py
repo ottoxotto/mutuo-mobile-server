@@ -133,6 +133,11 @@ def CalcolaMutuoAPI(UserData) :
 
 def CalcolaCashIniziale(UserData) :
 
+    for key in UserData:
+        UserData[key] = UserData[key].strip("€")
+        UserData[key] = UserData[key].strip("%")
+        UserData[key] = UserData[key].replace(",","")
+        
     Finanziamento = float(UserData["Prezzo Immobile"])*float(UserData["Percentuale Mutuo"])*0.01
 
     if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<2:
