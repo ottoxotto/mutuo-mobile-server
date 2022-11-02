@@ -69,9 +69,8 @@ def returnDataSpesa():
     print("HERE")
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio = CalcolaCashIniziale(request_data)
-    dummy=1
-    ReturnData = OutputsSpeseIniziali.to_json()
+    # OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio = CalcolaCashIniziale(request_data)
+    # ReturnData = OutputsSpeseIniziali.to_json()
 
     return "ReturnData"
 
