@@ -191,7 +191,7 @@ def CalcolaCashIniziale(UserData) :
         "CostoIVA" : SpesaIVA
     }
 
-    SpeseIniziali["TotCosti"] = SpeseIniziali["CostoAgenzia"] + SpeseIniziali["CostoNotaio"] + SpeseIniziali["CostoIstruttoria"] + SpeseIniziali["CostoSostituitiva"] + SpeseIniziali["CostoPerizia"] + SpeseIniziali["CostoAssicurazioni"] + SpeseIniziali["CostoIVA"]
+    SpeseIniziali["TotCosti"] = SpeseIniziali["CostoAgenzia"] + SpeseIniziali["CostoNotaio"] + SpeseIniziali["CostoIstruttoria"] + SpeseIniziali["CostoSostitutiva"] + SpeseIniziali["CostoPerizia"] + SpeseIniziali["CostoAssicurazioni"] + SpeseIniziali["CostoIVA"]
     SpeseIniziali["AnticipoMutuo"] = float(UserData["Prezzo Immobile"])-Finanziamento
     SpeseIniziali["SpesaTotIniziale"] = SpeseIniziali["TotCosti"] + SpeseIniziali["AnticipoMutuo"]
     
