@@ -128,7 +128,7 @@ def CalcolaMutuoAPI(UserData) :
 
 def CalcolaCashIniziale(UserData) :
 
-    Finanziamento = float(UserData["Prezzo Immobile"])*float(UserData["Percentuale Mutuo"])
+    Finanziamento = float(UserData["Prezzo Immobile"])*float(UserData["Percentuale Mutuo"])*0.01
 
     if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<2:
         IstruttoriaType = "percentuale"
@@ -148,13 +148,13 @@ def CalcolaCashIniziale(UserData) :
             SpesaIpotecaria = 50
             SpesaCatastale = 50
             IVA = 0
-            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
         elif "Costruttore" in UserData["Tipologia Acquisto"]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
             IVA = 4
-            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
     elif "Seconda" in UserData["Tipologia Acquisto"]:
         Sostitutiva = 2
         SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
@@ -166,17 +166,17 @@ def CalcolaCashIniziale(UserData) :
             SpesaIpotecaria = 50
             SpesaCatastale = 50
             IVA = 0
-            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
         elif "Costruttore" in UserData["Tipologia Acquisto"]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
             if "Lusso" in UserData["Tipologia Acquisto"]:
                 IVA = 22
-                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
             else:
                 IVA = 10
-                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
+                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
 
 
     SpeseIniziali = {
