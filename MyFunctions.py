@@ -137,10 +137,10 @@ def CalcolaCashIniziale(UserData) :
         IstruttoriaType = "fissa"
         Istruttoria = float(UserData["Spese di Istruttoria"])
 
-    if UserData["Tipologia Acquisto"].contains("Prima"):
+    if "Prima" in UserData["Tipologia Acquisto"]:
         Sostitutiva = 0.25
-        SpesaSostitutiva = Sostitutiva*Finanziamento
-        if UserData["Tipologia Acquisto"].contains("Privato"):
+        SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
+        if "Privato" in UserData["Tipologia Acquisto"]:
             Registro = 2
             SpesaRegistro = Registro*0.01*float(UserData["Prezzo Immobile"])
             if SpesaRegistro <1000:
@@ -149,16 +149,16 @@ def CalcolaCashIniziale(UserData) :
             SpesaCatastale = 50
             IVA = 0
             SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
-        elif UserData["Tipologia Acquisto"].contains("Costruttore"):
+        elif "Costruttore" in UserData["Tipologia Acquisto"]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
             IVA = 4
             SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
-    elif UserData["Tipologia Acquisto"].contains("Seconda"):
+    elif "Seconda" in UserData["Tipologia Acquisto"]:
         Sostitutiva = 2
-        SpesaSostitutiva = Sostitutiva*Finanziamento
-        if UserData["Tipologia Acquisto"].contains("Privato"):
+        SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
+        if "Privato" in UserData["Tipologia Acquisto"]:
             Registro = 9
             SpesaRegistro = Registro*0.01*float(UserData["Prezzo Immobile"])
             if SpesaRegistro <1000:
@@ -167,11 +167,11 @@ def CalcolaCashIniziale(UserData) :
             SpesaCatastale = 50
             IVA = 0
             SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
-        elif UserData["Tipologia Acquisto"].contains("Costruttore"):
+        elif "Costruttore" in UserData["Tipologia Acquisto"]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
-            if UserData["Tipologia Acquisto"].contains("Lusso"):
+            if "Lusso" in UserData["Tipologia Acquisto"]:
                 IVA = 22
                 SpesaIVA = IVA*float(UserData["Prezzo Immobile"])
             else:
@@ -184,7 +184,7 @@ def CalcolaCashIniziale(UserData) :
         "TotFinanziamento €" : Finanziamento,
         "CostoAgenzia" : float(UserData["Percentuale Agenzia"])*0.01*float(UserData["Prezzo Immobile"]),
         "CostoIstruttoria" : Istruttoria,
-        "CostoSostitutiva" : float(UserData["Imposta Sostitutiva"])*0.01*Finanziamento,
+        "CostoSostitutiva" : SpesaSostitutiva,
         "CostoPerizia" : float(UserData["Spese di Perizia"]),
         "CostoAssicurazioni" : float(UserData["Assicurazioni"]),
         "CostoNotaio" : SpesaRegistro + SpesaIpotecaria + SpesaCatastale,
