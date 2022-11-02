@@ -132,10 +132,10 @@ def CalcolaCashIniziale(UserData) :
 
     if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<2:
         IstruttoriaType = "percentuale"
-        Istruttoria = float(UserData["Istruttoria"])*0.01*(Finanziamento)
+        Istruttoria = float(UserData["Spese di Istruttoria"])*0.01*(Finanziamento)
     elif float(UserData["Spese di Istruttoria"])>2:
         IstruttoriaType = "fissa"
-        Istruttoria = float(UserData["Istruttoria"])
+        Istruttoria = float(UserData["Spese di Istruttoria"])
 
     if UserData["Tipologia Acquisto"].contains("Prima"):
         Sostitutiva = 0.25
