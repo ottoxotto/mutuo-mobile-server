@@ -7,6 +7,7 @@ def CalcolaMutuoAPI(UserData) :
     for key in UserData:
         UserData[key] = UserData[key].strip("€")
         UserData[key] = UserData[key].strip("%")
+        UserData[key] = UserData[key].replace(",","")
         
     TotFinanziamento = float(UserData["Finanziamento"])
     In_AnniTotCalc = int(UserData["Anni per Calcolo Mutuo"])
