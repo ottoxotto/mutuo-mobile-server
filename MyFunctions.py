@@ -140,12 +140,15 @@ def CalcolaCashIniziale(UserData) :
         
     Finanziamento = float(UserData["Prezzo Immobile"])*float(UserData["Percentuale Mutuo"])*0.01
 
-    if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<2:
+    if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<=2:
         IstruttoriaType = "percentuale"
         Istruttoria = float(UserData["Spese di Istruttoria"])*0.01*(Finanziamento)
-    elif float(UserData["Spese di Istruttoria"])>2:
+    elif float(UserData["Spese di Istruttoria"])>=50:
         IstruttoriaType = "fissa"
         Istruttoria = float(UserData["Spese di Istruttoria"])
+    else:
+        IstruttoriaType = "fissa"
+        Istruttoria = 0.0
 
     if "Prima" in UserData["Tipologia Acquisto"]:
         Sostitutiva = 0.25
