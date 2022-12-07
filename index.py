@@ -2,14 +2,16 @@ from flask import Flask, request
 from flask_restful import Api
 import json
 
-from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAPI
+from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAPI, EurostatCall
 
 app = Flask(__name__)
 api = Api(app)
 
 @app.route("/")
 def home():
-    return 'Home Page Route'
+    return "Homepage"
+
+
 
 @app.route("/outMutuo", methods = ["POST"])
 def returnDataDetails():
@@ -87,5 +89,17 @@ def returnDataSpesaDetails():
 
     return ReturnData
 
+@app.route("/outGrafici", methods = ["POST"])
+def returnDataGraphs():
+
+    print("/outGrafici")
+
+    request_data = request.data
+    request_data = json.loads(request_data.decode("utf-8"))
+    OutputsGrafico = EurostatCall(request_data)
+    dummy=1
+    ReturnData = OutputsGrafico.to_json()
+
+    return ReturnData
 # if __name__ == "__main__":
 #     app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
