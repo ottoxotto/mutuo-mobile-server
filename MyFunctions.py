@@ -262,6 +262,7 @@ def CalcolaIMU(InputsCasa) :
 
 def EurostatCall(UserData) :
     code = UserData["Grafico"]
+    pars = eurostat.get_pars(code)
 
     if code == 'ilc_lvho02':
         title = "Distribution of population by tenure status, type of household and income group - EU-SILC survey"
@@ -281,9 +282,6 @@ def EurostatCall(UserData) :
 
 
     data = eurostat.get_data_df(code, filter_pars=my_filter_pars)
-    
-    print(title)
-    print(data)
-    # print(data.iloc[:,len(pars):data.size])
+    data_filter = data.iloc[:,len(pars):data.size]
 
-    return data
+    return data_filter
