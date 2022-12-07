@@ -284,4 +284,4 @@ def EurostatCall(UserData) :
     data = eurostat.get_data_df(code, filter_pars=my_filter_pars)
     data_filter = data.iloc[:,len(pars):data.size]
 
-    return data_filter
+    return data
