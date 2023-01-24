@@ -262,7 +262,7 @@ def CalcolaMutuoRataFissaAPI(UserData) :
     dummy=1
     return OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo
 
-def CalcolaMutuoTilgungAPI(UserData) :
+def CalcolaMutuoRimborsoCapAPI(UserData) :
 
     for key in UserData:
         UserData[key] = UserData[key].strip("€")
@@ -390,6 +390,8 @@ def CalcolaMutuoTilgungAPI(UserData) :
     OutputOverviewMutuo = OutputOverviewMutuo.T
     # OutputOverviewMutuo = OutputOverviewMutuo.round(1)    
     dummy=1
+    return OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo
+
 
 def CalcolaCashIniziale(UserData) :
 

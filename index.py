@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_restful import Api
 import json
 
-from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAnniCalcAPI, CalcolaMutuoRataFissaAPI, CalcolaMutuoTilgungAPI, EurostatCall
+from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAnniCalcAPI, CalcolaMutuoRataFissaAPI, CalcolaMutuoRimborsoCapAPI, EurostatCall
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,7 +25,7 @@ def returnDataDetails():
     elif "Rata" in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
     elif "Rimborso Capitale" in request_data:
-        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
 
     dummy=1
     ReturnData = OutputsMutuo.to_json()
@@ -44,7 +44,7 @@ def returnDataAnno():
     elif "Rata" in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
     elif "Rimborso Capitale" in request_data:
-        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
     dummy=1
     ReturnData = OutputsAnnuoMutuo.to_json()
 
@@ -62,7 +62,7 @@ def returnDataAvg():
     elif "Rata" in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
     elif "Rimborso Capitale" in request_data:
-        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
     dummy=1
     ReturnData = OutputAvgMutuo.to_json()
 
@@ -80,7 +80,7 @@ def returnDataOv():
     elif "Rata" in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
     elif "Rimborso Capitale" in request_data:
-        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
     dummy=1
     ReturnData = OutputOverviewMutuo.to_json()
 
