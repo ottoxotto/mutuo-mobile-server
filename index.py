@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_restful import Api
 import json
 
-from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAPI, EurostatCall
+from MyFunctions import CalcolaCashIniziale, CalcolaMutuoAnniCalcAPI, CalcolaMutuoRataFissaAPI, CalcolaMutuoTilgungAPI, EurostatCall
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,8 +18,14 @@ def returnDataDetails():
 
     print("/outMutuo")
     request_data = request.data
-    request_data = json.loads(request_data.decode("utf-8"))
-    OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAPI(request_data)
+    request_data = json.loads(request_data.decode("utf-8")) 
+    if "Anni per Calcolo Mutuo" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
+    elif "Rata" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
+    elif "Rimborso Capitale" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
+
     dummy=1
     ReturnData = OutputsMutuo.to_json()
 
@@ -32,7 +38,12 @@ def returnDataAnno():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAPI(request_data)
+    if "Anni per Calcolo Mutuo" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
+    elif "Rata" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
+    elif "Rimborso Capitale" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
     dummy=1
     ReturnData = OutputsAnnuoMutuo.to_json()
 
@@ -45,7 +56,12 @@ def returnDataAvg():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAPI(request_data)
+    if "Anni per Calcolo Mutuo" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
+    elif "Rata" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
+    elif "Rimborso Capitale" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
     dummy=1
     ReturnData = OutputAvgMutuo.to_json()
 
@@ -58,7 +74,12 @@ def returnDataOv():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAPI(request_data)
+    if "Anni per Calcolo Mutuo" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
+    elif "Rata" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
+    elif "Rimborso Capitale" in request_data:
+        OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoTilgungAPI(request_data)
     dummy=1
     ReturnData = OutputOverviewMutuo.to_json()
 
