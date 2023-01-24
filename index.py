@@ -19,6 +19,7 @@ def returnDataDetails():
     print("/outMutuo")
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8")) 
+    print(request_data)
     if "Anni per Calcolo Mutuo" in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
     elif "Rata" in request_data:

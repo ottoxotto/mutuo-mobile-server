@@ -263,6 +263,7 @@ def CalcolaMutuoRataFissaAPI(UserData) :
     return OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo
 
 def CalcolaMutuoTilgungAPI(UserData) :
+    
     for key in UserData:
         UserData[key] = UserData[key].strip("€")
         UserData[key] = UserData[key].strip("%")

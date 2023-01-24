@@ -52,7 +52,7 @@ import pandas as pd
 
 UserData = {
     "Finanziamento": "400000",
-    "Tilgung": "2.85",
+    "Rimborso Capitale": "2.85",
     "Tasso di Interesse": "3.75",
     "Durata Anni Tasso Fisso": "20",
 }
@@ -63,7 +63,7 @@ for key in UserData:
     UserData[key] = UserData[key].replace(",","")
 
 TotFinanziamento = float(UserData["Finanziamento"])
-In_Tilgung = float(UserData["Tilgung"])
+In_Tilgung = float(UserData["Rimborso Capitale"])
 In_Tasso = float(UserData["Tasso di Interesse"])
 TassoTot = float(In_Tasso/100)
 In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
