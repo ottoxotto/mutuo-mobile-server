@@ -1,5 +1,5 @@
-# import eurostat
-# import pandas as pd
+import eurostat
+import pandas as pd
 
 # title = "Distribution of population by tenure status, type of household and income group - EU-SILC survey"
 # code = 'ilc_lvho02'
@@ -37,15 +37,15 @@
 # print(data)
 # # print(data.iloc[:,len(pars):data.size])
 
-# title = "HICP - monthly data (annual rate of change)"
-# code = 'PRC_HICP_MANR'
-# pars = eurostat.get_pars(code)
-# my_filter_pars = {"geo" : "IT", 'startPeriod': "2011-01"}
-# data = eurostat.get_data_df(code, filter_pars=my_filter_pars)
-# print(title)
-# print(data)
-# # print(data.iloc[:,len(pars):data.size])
-# dummy=1
+title = "HICP - monthly data (annual rate of change)"
+code = 'PRC_HICP_MANR'
+pars = eurostat.get_pars(code)
+my_filter_pars = {"geo" : "IT", "coicop": "CP00",  'startPeriod': "2011-01"}
+data = eurostat.get_data_df(code, filter_pars=my_filter_pars)
+print(title)
+print(data)
+# print(data.iloc[:,len(pars):data.size])
+dummy=1
 
 import numpy as np
 import pandas as pd

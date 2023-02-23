@@ -539,7 +539,7 @@ def EurostatCall(UserData) :
         my_filter_pars = {"geo" : "IT", "hhtyp": "TOTAL", 'startPeriod': 2011}
     elif code == 'PRC_HICP_MANR':
         title = "HICP - monthly data (annual rate of change)"
-        my_filter_pars = {"geo" : "IT", "COICOP": "CP00",  'startPeriod': "2011-01"}
+        my_filter_pars = {"geo" : "IT", "coicop": "CP00",  'startPeriod': "2011-01"}
 
 
     data = eurostat.get_data_df(code, filter_pars=my_filter_pars)
