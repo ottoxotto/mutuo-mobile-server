@@ -525,21 +525,21 @@ def EurostatCall(UserData) :
     code = UserData["Grafico"]
     pars = eurostat.get_pars(code)
 
-    if code == 'ilc_lvho02':
+    if code == "ilc_lvho02":
         title = "Distribution of population by tenure status, type of household and income group - EU-SILC survey"
-        my_filter_pars = {"geo" : "IT", "hhtyp" : "TOTAL", "tenure" : ["OWN","OWN_L","RENT"], "incgrp" : "TOTAL", 'startPeriod': 2011}
-    elif code == 'PRC_HPI_A':
+        my_filter_pars = {"geo" : "IT", "hhtyp" : "TOTAL", "tenure" : "OWN", "incgrp" : "TOTAL", "startPeriod": 2011}
+    elif code == "PRC_HPI_A":
         title = "House price index (2015 = 100) - annual data"
-        my_filter_pars = {"geo" : "IT", "purchase" : "TOTAL", "unit": ["I10_A_AVG","I15_A_AVG","RCH_A_AVG"], 'startPeriod': 2011}
-    elif code == 'ILC_MDES05':
+        my_filter_pars = {"geo" : "IT", "purchase" : "TOTAL", "unit": "RCH_A_AVG", "startPeriod": 2011}
+    elif code == "ILC_MDES05":
         title = "Arrears (mortgage or rent, utility bills or hire purchase) from 2003 onwards - EU-SILC survey"
-        my_filter_pars = {"geo" : "IT", "incgrp" : "TOTAL", "hhtyp": "TOTAL", 'startPeriod': 2011}
-    elif code == 'ILC_MDED01':
+        my_filter_pars = {"geo" : "IT", "incgrp" : "TOTAL", "hhtyp": "TOTAL", "startPeriod": 2011}
+    elif code == "ILC_MDED01":
         title = "Share of housing costs in disposable household income, by type of household and income group - EU-SILC survey"
-        my_filter_pars = {"geo" : "IT", "hhtyp": "TOTAL", 'startPeriod': 2011}
-    elif code == 'PRC_HICP_MANR':
+        my_filter_pars = {"geo" : "IT", "hhtyp": "TOTAL", "incgrp": "TOTAL", "startPeriod": 2011}
+    elif code == "PRC_HICP_MANR":
         title = "HICP - monthly data (annual rate of change)"
-        my_filter_pars = {"geo" : "IT", "coicop": "CP00",  'startPeriod': "2011-01"}
+        my_filter_pars = {"geo" : "IT", "coicop": "CP00",  "startPeriod": "2011-01"}
 
 
     data = eurostat.get_data_df(code, filter_pars=my_filter_pars)
