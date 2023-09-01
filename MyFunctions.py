@@ -509,7 +509,7 @@ def CalcolaCashInizialeDE(UserData) :
     Grunderwerbsteuer = float(UserData["Grunderwerbsteuer"])*0.01*float(UserData["Prezzo Immobile"])
     Grundbuchkosten = float(UserData["Grundbuchkosten"])*0.01*float(UserData["Prezzo Immobile"])
     Notarkosten = float(UserData["Notarkosten"])*0.01*float(UserData["Prezzo Immobile"])
-    Maklergebueren = float(UserData["Maklergebüren"])*0.01*float(UserData["Prezzo Immobile"])
+    Maklergebueren = float(UserData["Maklergebühren"])*0.01*float(UserData["Prezzo Immobile"])
 
     SpeseIniziali = {
         "Bundesland" : UserData["Bundesland"],
