@@ -513,7 +513,7 @@ def CalcolaCashInizialeDE(UserData) :
 
     SpeseIniziali = {
         "Bundesland" : UserData["Bundesland"],
-        "PrezzoImmobile €" : float(UserData["Prezzo Immobile"]),
+        "PrezzoImmobile" : float(UserData["Prezzo Immobile"]),
         "Grunderwerbsteuer" : Grunderwerbsteuer,
         "Grundbuchkosten" : Grundbuchkosten,
         "Notarkosten" : Notarkosten,
@@ -523,9 +523,9 @@ def CalcolaCashInizialeDE(UserData) :
     SpeseIniziali["TotCosti"] = SpeseIniziali["Grunderwerbsteuer"] + SpeseIniziali["Grundbuchkosten"] + SpeseIniziali["Notarkosten"] + SpeseIniziali["Maklergebueren"]
     
     RegioneList = ["Bundesland" , SpeseIniziali["Bundesland"]]
-    PrezzoImmobileList = ["Prezzo Immobile €" , round(SpeseIniziali["PrezzoImmobile €"],0)]
-    SpeseTotList = ["Spese Totali €" , round(SpeseIniziali["TotCosti €"],0)]
-    GrunderwerbsteurList = ["Di cui Grunderwerbsteuer €" , round(SpeseIniziali["Grunderwerbsteuer €"],0)]
+    PrezzoImmobileList = ["Prezzo Immobile €" , round(SpeseIniziali["PrezzoImmobile"],0)]
+    SpeseTotList = ["Spese Totali €" , round(SpeseIniziali["TotCosti"],0)]
+    GrunderwerbsteurList = ["Di cui Grunderwerbsteuer €" , round(SpeseIniziali["Grunderwerbsteuer"],0)]
     GrundbuchkostenList = ["Di cui Grundbuchkosten €" , round(SpeseIniziali["Grundbuchkosten"],0)]
     NotarkostenList = ["Di cui Notarkosten €" , round(SpeseIniziali["Notarkosten"],0)]
     MaklergebuerenList = ["Di cui Maklergebueren €" , round(SpeseIniziali["Maklergebueren"],0)]
