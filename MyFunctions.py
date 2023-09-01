@@ -499,6 +499,48 @@ def CalcolaCashIniziale(UserData) :
 
     return OutputsSpeseIniziali, OutputsSpeseInizialiDettaglio
 
+def CalcolaCashInizialeDE(UserData) :
+
+    for key in UserData:
+        UserData[key] = UserData[key].strip("€")
+        UserData[key] = UserData[key].strip("%")
+        UserData[key] = UserData[key].replace(",","")
+
+    Grunderwerbsteur = float(UserData["Grunderwerbsteur"])*0.01*float(UserData["Prezzo Immobile"])
+    Grundbuchkosten = float(UserData["Grundbuchkosten"])*0.01*float(UserData["Prezzo Immobile"])
+    Notarkosten = float(UserData["Notarkosten"])*0.01*float(UserData["Prezzo Immobile"])
+    Maklergebueren = float(UserData["Maklergebüren"])*0.01*float(UserData["Prezzo Immobile"])
+
+    SpeseIniziali = {
+        "Bundesland" : UserData["Bundesland"],
+        "PrezzoImmobile €" : float(UserData["Prezzo Immobile"]),
+        "Grunderwerbsteur" : Grunderwerbsteur,
+        "Grundbuchkosten" : Grundbuchkosten,
+        "Notarkosten" : Notarkosten,
+        "Maklergebueren" : Maklergebueren,
+    }
+
+    SpeseIniziali["TotCosti"] = SpeseIniziali["Grunderwerbsteur"] + SpeseIniziali["Grundbuchkosten"] + SpeseIniziali["Notarkosten"] + SpeseIniziali["Maklergebueren"]
+    
+    RegioneList = ["Bundesland" , SpeseIniziali["Bundesland"]]
+    PrezzoImmobileList = ["Prezzo Immobile €" , round(SpeseIniziali["PrezzoImmobile €"],0)]
+    SpeseTotList = ["Spese Totali €" , round(SpeseIniziali["TotCosti €"],0)]
+    GrunderwerbsteurList = ["Di cui Grunderwerbsteur €" , round(SpeseIniziali["Grunderwerbsteur €"],0)]
+    GrundbuchkostenList = ["Di cui Grundbuchkosten €" , round(SpeseIniziali["Grundbuchkosten"],0)]
+    NotarkostenList = ["Di cui Notarkosten €" , round(SpeseIniziali["Notarkosten"],0)]
+    MaklergebuerenList = ["Di cui Maklergebueren €" , round(SpeseIniziali["Maklergebueren"],0)]
+
+
+    OutputsSpeseInizialiDettaglioDE = pd.DataFrame(list(zip(RegioneList, PrezzoImmobileList, SpeseTotList, GrunderwerbsteurList, GrundbuchkostenList, NotarkostenList, MaklergebuerenList)),
+        columns =["Bundesland", "Prezzo Immobile €", "Spese Totali €","Di cui Grunderwerbsteur €", "Di cui Grundbuchkosten €", "Di cui Notarkosten €", "Di cui Maklergebueren €"])
+
+    OutputsSpeseInizialiDettaglioDE = OutputsSpeseInizialiDettaglioDE.T
+
+    OutputsSpeseInizialiDE= pd.DataFrame(data=SpeseIniziali, index=[0])
+    OutputsSpeseInizialiDE.round(0)
+
+    return OutputsSpeseInizialiDE, OutputsSpeseInizialiDettaglioDE
+
 def CalcolaIMU(InputsCasa) : 
 
     CoeffRivalutazione = 5
