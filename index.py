@@ -123,6 +123,19 @@ def returnDataSpesaDetails():
 
     return ReturnData
 
+@app.route("/outSpeseOverviewDE", methods = ["POST"])
+def returnDataSpesaDetails():
+
+    print("/outSpeseOverviewDE")
+
+    request_data = request.data
+    request_data = json.loads(request_data.decode("utf-8"))
+    OutputsSpeseInizialiDE, OutputsSpeseInizialiDettaglioDE = CalcolaCashInizialeDE(request_data)
+    dummy=1
+    ReturnData = OutputsSpeseInizialiDettaglioDE.to_json()
+
+    return ReturnData
+
 @app.route("/outGrafici", methods = ["POST"])
 def returnDataGraphs():
 
