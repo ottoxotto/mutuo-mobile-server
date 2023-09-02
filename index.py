@@ -124,7 +124,7 @@ def returnDataSpesaDetails():
     return ReturnData
 
 @app.route("/outSpeseOverviewDE", methods = ["POST"])
-def returnDataSpesaDetails():
+def returnDataSpesaDetailsDE():
 
     print("/outSpeseOverviewDE")
 
