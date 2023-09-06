@@ -106,7 +106,7 @@ def returnDataOv():
     return ReturnData
 
 @app.route("/outMutuoAvgDE", methods = ["POST"])
-def returnDataAnno():
+def returnDataAnnoDE():
 
     print("/outMutuoAvgDE")
 
