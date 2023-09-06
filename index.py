@@ -33,7 +33,7 @@ def returnDataDetails():
     return ReturnData
 
 @app.route("/outMutuoDE", methods = ["POST"])
-def returnDataDetails():
+def returnDataDetailsDE():
 
     print("/outMutuoDE")
     request_data = request.data
@@ -124,7 +124,7 @@ def returnDataAnno():
     return ReturnData
 
 @app.route("/outMutuoAvgTotDE", methods = ["POST"])
-def returnDataAvg():
+def returnDataAvgDE():
 
     print("/outMutuoAvgTotDE")
 
@@ -142,7 +142,7 @@ def returnDataAvg():
     return ReturnData
 
 @app.route("/outMutuoOverviewDE", methods = ["POST"])
-def returnDataOv():
+def returnDataOvDE():
 
     print("/outMutuoOverviewDE")
 
