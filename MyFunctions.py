@@ -725,7 +725,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
                 TotCapRimanenteAnnuo[AnniRata[idx-1]] = TotCapRimanente[idx]
                 TotInteressiAnnuo[AnniRata[idx-1]] = TotInteressi[idx]
                 AnniRataAnnuo[AnniRata[idx-1]] = AnniRata[idx-1]
-            if idx%In_MesiPreMaxiRata == 0 :
+            if idx%In_MesiPreMaxiRata == 0 and idx == AnniRata[idx]*12 + In_MesiPreMaxiRata:
                 TotCapRimanente[idx] = TotCapRimanente[idx]-In_MaxiRata
 
 
