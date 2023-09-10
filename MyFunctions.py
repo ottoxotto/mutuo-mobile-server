@@ -723,7 +723,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
             print("AnniRata[idx]: ", AnniRata[idx])
 
             if (idx == In_MesiPreMaxiRata) or (idx == AnniRata[idx]*12 + In_MesiPreMaxiRata):
-                TotCapRimanente[idx] = TotCapRimanente[idx]-In_MaxiRata
+                TotCapRimanente[idx] = float(TotCapRimanente[idx])-In_MaxiRata
                 MaxiRataAnnuale[idx] = In_MaxiRata
                 TotMaxiRataAnnuale[idx] = In_MaxiRata
                 if idx>12:
