@@ -758,13 +758,13 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
     TotMaxiRataAnnualeFinale = float(TotMaxiRataAnnuale[RataFinale])
     TotInteressiFinale = float(TotInteressi[RataFinale])
 
-    OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €" ])
+    OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi, MaxiRataAnnuale)),
+        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €" ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
-    OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €"])
+    OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo, MaxiRataAnnuale)),
+        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €"])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
