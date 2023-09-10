@@ -675,8 +675,10 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
     Rata = ["" for i in range(0,RateTotali+1)]
     InteressePerRata = ["" for i in range(0,RateTotali+1)]
     CapitalePerRata = ["" for i in range(0,RateTotali+1)]
+    MaxiRataAnnuale = ["" for i in range(0,RateTotali+1)]
     TotCapRimanente = ["" for i in range(0,RateTotali+1)]
     TotInteressi = ["" for i in range(0,RateTotali+1)]
+    TotMaxiRataAnnuale = ["" for i in range(0,RateTotali+1)]
 
     RataMediaAnnua = ["" for i in range(0,In_AnniTotCalc+1)]
     CapitaleMedioAnnuo = ["" for i in range(0,In_AnniTotCalc+1)]
@@ -698,8 +700,10 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
             AnniRata[idx] = 0
             InteressePerRata[idx] = 0
             CapitalePerRata[idx] = 0
+            MaxiRataAnnuale[idx] = 0
             TotCapRimanente[idx] = TotFinanziamento
             TotInteressi[idx] = 0
+            TotMaxiRataAnnuale[idx] = 0
             RataMediaAnnua[idx] = 0
 
             RataMediaAnnua[idx] = Rata[idx]
@@ -709,7 +713,15 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
             TotInteressiAnnuo[idx] = TotInteressi[idx]
             AnniRataAnnuo[idx] = AnniRata[idx]
         else:
-            
+            if idx == In_MesiPreMaxiRata or idx == AnniRata[idx]*12 + In_MesiPreMaxiRata:
+                TotCapRimanente[idx] = TotCapRimanente[idx]-In_MaxiRata
+                MaxiRataAnnuale[idx] = In_MaxiRata
+                TotMaxiRataAnnuale[idx] = In_MaxiRata
+                if idx>12:
+                    TotMaxiRataAnnuale[idx] = TotMaxiRataAnnuale[idx-12] + In_MaxiRata                    
+            else:
+                MaxiRataAnnuale[idx] = 0
+
             Rata[idx] = float((TotFinanziamento/12)*(In_Tilgung+In_Tasso)/100)
             InteressePerRata[idx] = TotCapRimanente[idx-1]*TassoTot/12
             CapitalePerRata[idx] = Rata[idx]-InteressePerRata[idx]
@@ -725,8 +737,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
                 TotCapRimanenteAnnuo[AnniRata[idx-1]] = TotCapRimanente[idx]
                 TotInteressiAnnuo[AnniRata[idx-1]] = TotInteressi[idx]
                 AnniRataAnnuo[AnniRata[idx-1]] = AnniRata[idx-1]
-            if idx == In_MesiPreMaxiRata or idx == AnniRata[idx]*12 + In_MesiPreMaxiRata:
-                TotCapRimanente[idx] = TotCapRimanente[idx]-In_MaxiRata
+            
 
 
     if In_AnniTotCalc>=5:
@@ -744,6 +755,8 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
 
 
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
+    TotMaxiRataAnnualeFinale = float(TotMaxiRataAnnuale[RataFinale])
+    TotInteressiFinale = float(TotInteressi[RataFinale])
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi)),
         columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €" ])
@@ -766,7 +779,11 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
         "Tasso %" : round(TassoTot*100,2),
         "Rimborso Capitale %" : round(In_Tilgung,2),
         "Rata €" : round(Rata[1],1),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0)
+        "Maxi-Rata Annuale €" : round(In_MaxiRata,0),
+        "Tot Maxi-Rata Annuale €" : round(TotMaxiRataAnnualeFinale,0),
+        "Capitale Rimanente €" : round(MaxiRataFinale,0),
+        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        
     }
 
     TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
@@ -774,11 +791,14 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
     TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
     TilgungList = ["Rimborso Capitale %" , round(In_Tilgung,2)]
     RataList = ["Rata €", round(Rata[1],1)]
+    In_MaxiRataList = ["Maxi-Rata Annuale €" , round(In_MaxiRata,0)]
+    TotMaxiRataAnnualeFinaleList = ["Tot Maxi-Rata Annuale €" , round(TotMaxiRataAnnualeFinale,0)]
     MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
 
 
-    OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, MaxiRataFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Capitale Rimanente €" ])
+    OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, In_MaxiRataList, TotMaxiRataAnnualeFinaleList, MaxiRataFinaleList, TotInteressiFinaleList )),
+        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Maxi-Rata Annuale €", "Tot Maxi-Rata Annuale €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
