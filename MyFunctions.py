@@ -721,9 +721,11 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
             print("idx: ", idx)
             print("In_MesiPreMaxiRata: ", In_MesiPreMaxiRata)
             print("AnniRata[idx]: ", AnniRata[idx])
+            print("MaxiRataAnnuale[idx]: ", MaxiRataAnnuale[idx])
+            print("TotCapRimanente[idx-1]: ", TotCapRimanente[idx-1])
 
             if (idx == In_MesiPreMaxiRata) or (idx == AnniRata[idx]*12 + In_MesiPreMaxiRata):
-                TotCapRimanente[idx] = float(TotCapRimanente[idx])-In_MaxiRata
+                # TotCapRimanente[idx] = float(TotCapRimanente[idx-1])-In_MaxiRata
                 MaxiRataAnnuale[idx] = In_MaxiRata
                 TotMaxiRataAnnuale[idx] = In_MaxiRata
                 if idx>12:
@@ -732,12 +734,13 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
                 MaxiRataAnnuale[idx] = 0
 
             Rata[idx] = float((TotFinanziamento/12)*(In_Tilgung+In_Tasso)/100)
-            InteressePerRata[idx] = TotCapRimanente[idx-1]*TassoTot/12
+            InteressePerRata[idx] = (TotCapRimanente[idx-1]-MaxiRataAnnuale[idx])*TassoTot/12
             CapitalePerRata[idx] = Rata[idx]-InteressePerRata[idx]
-            TotCapRimanente[idx] = TotCapRimanente[idx-1]-CapitalePerRata[idx]
+            TotCapRimanente[idx] = TotCapRimanente[idx-1]-MaxiRataAnnuale[idx]-CapitalePerRata[idx]
             TotInteressi[idx] = TotInteressi[idx-1]+InteressePerRata[idx]
 
-            
+            print("InteressePerRata[idx]: ", InteressePerRata[idx])
+            print("TotCapRimanente[idx]: ", TotCapRimanente[idx])
             
             if (AnniRata[idx]> AnniRata[idx-1] and AnniRata[idx-1]>0) or (idx == RateTotali) :
                 RataMediaAnnua[AnniRata[idx-1]] = np.mean(Rata[idx-11:idx+1])
