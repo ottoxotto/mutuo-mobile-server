@@ -696,7 +696,8 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
     TotFinanziamentoList = []
     In_AnniTotTassoList = []
 
-    for idx in range(0, RateTotali+1):
+    # for idx in range(0, RateTotali+1):
+    for idx in range(0, 20):
         if idx == 0 :
             Rata[idx] = 0
             AnniRata[idx] = 0
@@ -720,7 +721,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
 
            
 
-            if (idx == In_MesiPreMaxiRata) or (idx == AnniRata[idx]*12 + In_MesiPreMaxiRata):
+            if (idx == In_MesiPreMaxiRata-1) or (idx == AnniRata[idx]*12 + In_MesiPreMaxiRata - 1):
                 # TotCapRimanente[idx] = float(TotCapRimanente[idx-1])-In_MaxiRata
                 MaxiRataAnnuale[idx] = In_MaxiRata
                 TotMaxiRataAnnuale[idx] = In_MaxiRata
@@ -729,6 +730,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
                     TotMaxiRataAnnuale[idx] = TotMaxiRataAnnuale[idx-12] + In_MaxiRata                    
             else:
                 MaxiRataAnnuale[idx] = 0
+                TotMaxiRataAnnuale[idx] =  TotMaxiRataAnnuale[idx-1]
 
             Rata[idx] = float((TotFinanziamento/12)*(In_Tilgung+In_Tasso)/100)
             InteressePerRata[idx] = (TotCapRimanente[idx-1]-MaxiRataAnnuale[idx])*TassoTot/12
