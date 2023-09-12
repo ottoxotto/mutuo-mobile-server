@@ -83,9 +83,9 @@ def CalcolaMutuoAnniCalcAPI(UserData) :
             CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[1:10]))
             InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[1:10]))
             AnniMediaTot.append("1-10")
-            if In_AnniTotCalc>10:
+            if In_AnniTotTasso>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:In_AnniTotTasso]))
-                InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[1:In_AnniTotTasso]))
+                InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[11:In_AnniTotTasso]))
                 AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
 
     Tilgung = float((Rata[1]-TassoTot*TotFinanziamento/12)*12/TotFinanziamento)
@@ -99,14 +99,12 @@ def CalcolaMutuoAnniCalcAPI(UserData) :
     InteressePerRata = InteressePerRata[0:In_AnniTotTasso*12+1]
     TotCapRimanente = TotCapRimanente[0:In_AnniTotTasso*12+1]
     TotInteressi = TotInteressi[0:In_AnniTotTasso*12+1]
-    MaxiRataAnnuale = MaxiRataAnnuale[0:In_AnniTotTasso*12+1]
 
     AnniRataAnnuo = AnniRataAnnuo[0:In_AnniTotTasso+1]
     CapitaleMedioAnnuo = CapitaleMedioAnnuo[0:In_AnniTotTasso+1]
     InteresseMedioAnnuo = InteresseMedioAnnuo[0:In_AnniTotTasso+1]
     TotCapRimanenteAnnuo = TotCapRimanenteAnnuo[0:In_AnniTotTasso+1]
     TotInteressiAnnuo = TotInteressiAnnuo[0:In_AnniTotTasso+1]
-    MaxiRataAnnualeAnnuo = MaxiRataAnnualeAnnuo[0:In_AnniTotTasso+1]
 
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi)),
