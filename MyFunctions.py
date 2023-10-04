@@ -14,7 +14,7 @@ def LanguageDict(UserData) :
             "UserInRata" : "Rata",
             "UserInMaxiRataAnnuale" : "Maxi-Rata Annuale",
             "UserInMeseMaxiRata" : "N° Mensilitá prima della Maxi-Rata",
-            "UserInAmmortamento" : "Ammortamento",
+            "UserInAmmortamento" : "Tasso di Ammortamento",
             "UserInPrezzo" : "Prezzo Immobile",
             "UserInPercMutuo" : "Percentuale Mutuo",
             "UserInPercAgenzia" : "Percentuale Agenzia",
@@ -42,7 +42,7 @@ def LanguageDict(UserData) :
             "OutFinanziamento" : "Finanziamento €",
             "OutAnniTassoFisso" : "Anni Tasso Fisso",
             "OutTasso" : "Tasso di Interesse %",
-            "OutAmmortamento" : "Ammortamento %",
+            "OutAmmortamento" : "Tasso diAmmortamento %",
             "OutMaxiRataAnnuale" : "Maxi-Rata Annuale",
             "OutTotMaxiRata" : "Tot. Maxi-Rate Annuali",
             "OutAnticipo" : "Anticipo Mutuo",
@@ -105,7 +105,7 @@ def LanguageDict(UserData) :
             "OutFinanziamento" : "Financing Amount €",
             "OutAnniTassoFisso" : "Fixed-term Duration",
             "OutTasso" : "Interest Rate %",
-            "OutAmmortamento" : "Amortization %",
+            "OutAmmortamento" : "Amortization Rate %",
             "OutTotMaxiRata" : "Tot. Lump Sum Payments",
             "OutAnticipo" : "Down Payment",
             "OutSpese" : "Purchasing fees",
@@ -217,7 +217,7 @@ def CalcolaMutuoAnniCalcAPI(UserData) :
             if In_AnniTotTasso>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:In_AnniTotTasso]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[11:In_AnniTotTasso]))
-                AnniMediaTot.append("11-" + In_AnniTotTasso)
+                AnniMediaTot.append("11-" + UserData[Dictionary["UserInAnniTotTasso"]])
 
     Tilgung = float((Rata[1]-TassoTot*TotFinanziamento/12)*12/TotFinanziamento)
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -460,7 +460,7 @@ def CalcolaMutuoRimborsoCapAPI(UserData) :
     Dictionary = LanguageDict(UserData)
 
     TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
-    In_Tilgung = float(UserData["Rimborso Capitale"])
+    In_Tilgung = float(UserData[Dictionary["UserInAmmortamento"]])
     In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
     In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
@@ -971,7 +971,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
     Dictionary = LanguageDict(UserData)
 
     TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
-    In_Tilgung = float(UserData["Rimborso Capitale"])
+    In_Tilgung = float(UserData[Dictionary["UserInAmmortamento"]])
     In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
     In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])

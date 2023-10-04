@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_restful import Api
 import json
 
-from MyFunctions import CalcolaCashIniziale, CalcolaCashInizialeDE, CalcolaMutuoAnniCalcAPI, CalcolaMutuoAnniCalcAPIDE, CalcolaMutuoRataFissaAPI, CalcolaMutuoRataFissaAPIDE, CalcolaMutuoRimborsoCapAPI, CalcolaMutuoRimborsoCapAPIDE, EurostatCall
+from MyFunctions import CalcolaCashIniziale, CalcolaCashInizialeDE, CalcolaMutuoAnniCalcAPI, CalcolaMutuoAnniCalcAPIDE, CalcolaMutuoRataFissaAPI, CalcolaMutuoRataFissaAPIDE, CalcolaMutuoRimborsoCapAPI, CalcolaMutuoRimborsoCapAPIDE, EurostatCall, LanguageDict
 
 app = Flask(__name__)
 api = Api(app)
@@ -20,11 +20,12 @@ def returnDataDetails():
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8")) 
     print(request_data)
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
 
     dummy=1
@@ -39,11 +40,12 @@ def returnDataDetailsDE():
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8")) 
     print(request_data)
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPIDE(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPIDE(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPIDE(request_data)
 
     dummy=1
@@ -58,11 +60,12 @@ def returnDataAnno():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
     dummy=1
     ReturnData = OutputsAnnuoMutuo.to_json()
@@ -76,11 +79,12 @@ def returnDataAvg():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
     dummy=1
     ReturnData = OutputAvgMutuo.to_json()
@@ -94,11 +98,12 @@ def returnDataOv():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPI(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPI(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPI(request_data)
     dummy=1
     ReturnData = OutputOverviewMutuo.to_json()
@@ -112,11 +117,12 @@ def returnDataAnnoDE():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPIDE(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPIDE(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPIDE(request_data)
     dummy=1
     ReturnData = OutputsAnnuoMutuo.to_json()
@@ -130,11 +136,12 @@ def returnDataAvgDE():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPIDE(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPIDE(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPIDE(request_data)
     dummy=1
     ReturnData = OutputAvgMutuo.to_json()
@@ -148,11 +155,12 @@ def returnDataOvDE():
 
     request_data = request.data
     request_data = json.loads(request_data.decode("utf-8"))
-    if "Anni per Calcolo Mutuo" in request_data:
+    Dictionary = LanguageDict(request_data)
+    if Dictionary["UserAnniCalcMutuo"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoAnniCalcAPIDE(request_data)
-    elif "Rata" in request_data:
+    elif Dictionary["UserInRata"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRataFissaAPIDE(request_data)
-    elif "Rimborso Capitale" in request_data:
+    elif Dictionary["UserInAmmortamento"] in request_data:
         OutputsMutuo, OutputsAnnuoMutuo, OutputAvgMutuo, OutputOverviewMutuo = CalcolaMutuoRimborsoCapAPIDE(request_data)
     dummy=1
     ReturnData = OutputOverviewMutuo.to_json()
