@@ -3,6 +3,135 @@ import eurostat
 import pandas as pd
 import numpy as np
 
+def LanguageDict(UserData) :
+
+    if UserData["Language"] == "it":
+        Dictionary = {
+            "UserFinanziamento" : "Finanziamento",
+            "UserAnniCalcMutuo" : "Anni per Calcolo Mutuo",
+            "UserInTasso" : "Tasso di Interesse",
+            "UserInAnniTotTasso" : "Anni Tasso Fisso",
+            "UserInRata" : "Rata",
+            "UserInMaxiRataAnnuale" : "Maxi-Rata Annuale",
+            "UserInMeseMaxiRata" : "N° Mensilitá prima della Maxi-Rata",
+            "UserInAmmortamento" : "Ammortamento",
+            "UserInPrezzo" : "Prezzo Immobile",
+            "UserInPercMutuo" : "Percentuale Mutuo",
+            "UserInPercAgenzia" : "Percentuale Agenzia",
+            "UserInIstruttoria" : "Spese di Istruttoria",
+            "UserInAssicurazione" : "Assicurazioni",
+            "UserInPerizia" : "Spese di Perizia",
+            "UserInGrunderwerbsteuer" : "Grunderwerbsteuer",
+            "UserInGrundbuchkosten" : "Grundbuchkosten",
+            "UserInNotarkosten" : "Notarkosten",
+            "UserInMaklergebühren" : "Maklergebühren",
+            "UserInTipAcquisto" : "Tipologia Acquisto",
+            "UserInBundesland" : "Bundesland",
+            "OutNRata" : "N° Rata",
+            "OutAnno" : "Anno",
+            "OutRata" : "Rata €",
+            "OutCapitale" : "Capitale €",
+            "OutInteresse" : "Interessi €",
+            "OutTotCapResiduo" : "Capitale residuo €",
+            "OutTotIntPagati" : "Interessi pagati €",
+            "OutCapMedioAnnuo" : "Capitale Medio Annuo €",
+            "OutIntMedioAnnuo" : "Interesse Medio Annuo €",
+            "OutAnni" : "Anni",
+            "OutCapMedio" : "Capitale Medio",
+            "OutIntMedio" : "Interesse Medio €",
+            "OutFinanziamento" : "Finanziamento €",
+            "OutAnniTassoFisso" : "Anni Tasso Fisso",
+            "OutTasso" : "Tasso di Interesse %",
+            "OutAmmortamento" : "Ammortamento %",
+            "OutMaxiRataAnnuale" : "Maxi-Rata Annuale",
+            "OutTotMaxiRata" : "Tot. Maxi-Rate Annuali",
+            "OutAnticipo" : "Anticipo Mutuo",
+            "OutSpese" : "Spese Iniziali",
+            "OutUsciteTot" : "Tot. Uscite Iniziali",
+            "OutPrezzo" : "Prezzo Immobile €",
+            "OutTipo" : "Tip. Acquisto",
+            "OutAgenzia" : "Parcella Agenzia €",
+            "OutIstruttoria" : "Spesa di Istruttoria €",
+            "OutSostitutiva" : "Imposta Sostitutiva €",
+            "OutPerizia" : "Costo Perizia €",
+            "OutAssicurazioni" : "Costo Assicurazioni €",
+            "OutNotaio" : "Costi Notarili €",
+            "OutRegistro" : "Di cui Imposta di Registro",
+            "OutIpotecaria" : "Di cui Imposta Ipotecaria",
+            "OutCatastale" : "Di cui Imposta Catastale",
+            "OutIVA" : "IVA €",
+            "OutPercMutuo" : "Percentuale Mutuo %",
+            "OutSpeseTot" : "Spese Totali €",
+            "OutGrunderwerbsteuer" : "Di cui Grunderwerbsteuer €",
+            "OutGrundbuchkosten" : "Di cui Grundbuchkosten €",
+            "OutNotarkosten" : "Di cui Notarkosten €",
+            "OutMaklergebühren" : "Di cui Maklergebühren €",
+
+        }
+    else:
+        Dictionary = {
+            "UserFinanziamento" : "Financing Amount",
+            "UserAnniCalcMutuo" : "N° of Years for Calculation",
+            "UserInTasso" : "Interest Rate",
+            "UserInAnniTotTasso" : "Fixed-term Duration",
+            "UserInRata" : "Monthly Payment",
+            "UserInMaxiRataAnnuale" : "Annual Lump Sum Payment",
+            "UserInMeseMaxiRata" : "N° Months before the Annual Lump Sum Payment",
+            "UserInAmmortamento" : "Amortization Rate",
+            "UserInPrezzo" : "Buying Price",
+            "UserInPercMutuo" : "Loan-to-Value Ratio",
+            "UserInPercAgenzia" : "Percentage for Real Estate Agent",
+            "UserInIstruttoria" : "Processing Fees",
+            "UserInAssicurazione" : "Insurance Fees",
+            "UserInPerizia" : "Valuation Fees",
+            "UserInGrunderwerbsteuer" : "Grunderwerbsteuer",
+            "UserInGrundbuchkosten" : "Grundbuchkosten",
+            "UserInNotarkosten" : "Notarkosten",
+            "UserInMaklergebühren" : "Maklergebühren",
+            "UserInTipAcquisto" : "Purchase Type",
+            "UserInBundesland" : "Bundesland",
+            "OutNRata" : "N° Payment",
+            "OutAnno" : "Year",
+            "OutRata" : "Monthly Payment €",
+            "OutCapitale" : "Principal €",
+            "OutInteresse" : "Interests €",
+            "OutTotCapResiduo" : "Residual Principal €",
+            "OutTotIntPagati" : "Payed Interests €",
+            "OutCapMedioAnnuo" : "Avg. Annual Principal €",
+            "OutIntMedioAnnuo" : "Avg. Annual Interests €",
+            "OutAnni" : "Years",
+            "OutCapMedio" : "Avg. Principal €",
+            "OutIntMedio" : "Avg. Interests €",
+            "OutFinanziamento" : "Financing Amount €",
+            "OutAnniTassoFisso" : "Fixed-term Duration",
+            "OutTasso" : "Interest Rate %",
+            "OutAmmortamento" : "Amortization %",
+            "OutTotMaxiRata" : "Tot. Lump Sum Payments",
+            "OutAnticipo" : "Down Payment",
+            "OutSpese" : "Purchasing fees",
+            "OutUsciteTot" : "Initial Tot. Expenses",
+            "OutPrezzo" : "Buying Price €",
+            "OutTipo" : "Purchase Type",
+            "OutAgenzia" : "Real Estate Agency Fees €",
+            "OutIstruttoria" : "Processing Fees €",
+            "OutSostitutiva" : "Replacement Tax €",
+            "OutPerizia" : "Valuation Fees €",
+            "OutAssicurazioni" : "Insurance Fees €",
+            "OutNotaio" : "Notary Fees €",
+            "OutRegistro" : "Of which Registration Tax",
+            "OutIpotecaria" : "Of which Mortgage Tax",
+            "OutCatastale" : "Of which Cadastral Tax",
+            "OutIVA" : "IVA €",
+            "OutPercMutuo" : "Loan-to-Value Ratio %",
+            "OutSpeseTot" : "Total Fees €",
+            "OutGrunderwerbsteuer" : "Of which Grunderwerbsteuer €",
+            "OutGrundbuchkosten" : "Of which Grundbuchkosten €",
+            "OutNotarkosten" : "Of which Notarkosten €",
+            "OutMaklergebühren" : "Of which Maklergebühren €",
+        }
+
+    return Dictionary
+
 def CalcolaMutuoAnniCalcAPI(UserData) :
     
     for key in UserData:
@@ -10,12 +139,14 @@ def CalcolaMutuoAnniCalcAPI(UserData) :
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
 
-    TotFinanziamento = float(UserData["Finanziamento"])
-    In_AnniTotCalc = int(UserData["Anni per Calcolo Mutuo"])
+    Dictionary = LanguageDict(UserData)
+
+    TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
+    In_AnniTotCalc = int(UserData[Dictionary["UserAnniCalcMutuo"]])
     RateTotali = int(In_AnniTotCalc*12)
-    In_Tasso = float(UserData["Tasso di Interesse"])
+    In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
-    In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
+    In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
     RataFinale = int(In_AnniTotTasso*12)
 
     # Inizializza liste
@@ -86,7 +217,7 @@ def CalcolaMutuoAnniCalcAPI(UserData) :
             if In_AnniTotTasso>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:In_AnniTotTasso]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[11:In_AnniTotTasso]))
-                AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
+                AnniMediaTot.append("11-" + In_AnniTotTasso)
 
     Tilgung = float((Rata[1]-TassoTot*TotFinanziamento/12)*12/TotFinanziamento)
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -108,42 +239,42 @@ def CalcolaMutuoAnniCalcAPI(UserData) :
 
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €" ])
+        columns =[Dictionary["OutNRata"], Dictionary["OutAnno"], Dictionary["OutRata"], Dictionary["OutCapitale"], Dictionary["OutInteresse"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
     OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €"])
+        columns =[Dictionary["OutAnno"], Dictionary["OutCapMedioAnnuo"], Dictionary["OutIntMedioAnnuo"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"]])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
     OutputAvgMutuo = pd.DataFrame(list(zip(AnniMediaTot, CapitaleMedioAnniTot, InteresseMedioAnniTot)),
-        columns =["Anni", "Capitale medio €", "Interesse medio €"])
+        columns =[Dictionary["OutAnni"], Dictionary["OutCapMedio"], Dictionary["OutIntMedio"]])
     
     OutputAvgMutuo = OutputAvgMutuo.round(1)
 
     OVdata = {
-        "Finanziamento €" : round(TotFinanziamento,0),
-        "Anni Tasso Fisso " : In_AnniTotTasso,
-        "Tasso %" : round(TassoTot*100,2),
-        "Rimborso Capitale %" : round(Tilgung*100,2),
-        "Rata €" : round(Rata[1],1),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0),
-        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        Dictionary["OutFinanziamento"] : round(TotFinanziamento,0),
+        Dictionary["OutAnniTassoFisso"] : In_AnniTotTasso,
+        Dictionary["OutTasso"] : round(TassoTot*100,2),
+        Dictionary["OutAmmortamento"] : round(Tilgung*100,2),
+        Dictionary["OutRata"] : round(Rata[1],1),
+        Dictionary["OutTotCapResiduo"] : round(MaxiRataFinale,0),
+        Dictionary["OutTotIntPagati"] : round(TotInteressiFinale,0),
 
     }
 
-    TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
-    In_AnniTotTassoList = ["Anni Tasso Fisso " , In_AnniTotTasso]
-    TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
-    TilgungList = ["Rimborso Capitale %" , round(Tilgung*100,2)]
-    RataList = ["Rata €", round(Rata[1],1)]
-    MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
-    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(TotFinanziamento,0)]
+    In_AnniTotTassoList = [Dictionary["UserInAnniTotTasso"] , In_AnniTotTasso]
+    TassoTotList = [Dictionary["OutTasso"] , round(TassoTot*100,2)]
+    TilgungList = [Dictionary["OutAmmortamento"] , round(Tilgung*100,2)]
+    RataList = [Dictionary["OutCapitale"], round(Rata[1],1)]
+    MaxiRataFinaleList = [Dictionary["OutTotCapResiduo"] , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = [Dictionary["OutTotIntPagati"] , round(TotInteressiFinale,0)]
 
 
     OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, MaxiRataFinaleList, TotInteressiFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
+        columns =[Dictionary["OutFinanziamento"], Dictionary["UserInAnniTotTasso"], Dictionary["OutTasso"], Dictionary["OutAmmortamento"], Dictionary["OutCapitale"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
@@ -158,11 +289,13 @@ def CalcolaMutuoRataFissaAPI(UserData) :
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
 
-    TotFinanziamento = float(UserData["Finanziamento"])
-    In_Rata = float(UserData["Rata"])
-    In_Tasso = float(UserData["Tasso di Interesse"])
+    Dictionary = LanguageDict(UserData)
+
+    TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
+    In_Rata = float(UserData[Dictionary["UserInRata"]])
+    In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
-    In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
+    In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
     In_AnniTotCalc = In_AnniTotTasso
     RateTotali = int(In_AnniTotCalc*12)
     RataFinale = int(In_AnniTotTasso*12)
@@ -253,7 +386,7 @@ def CalcolaMutuoRataFissaAPI(UserData) :
             if AnniTotCalc>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:AnniTotCalc]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[11:AnniTotCalc]))
-                AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
+                AnniMediaTot.append("11-" + UserData[Dictionary["UserInAnniTotTasso"]] )
 
     Tilgung = float((Rata[1]-TassoTot*TotFinanziamento/12)*12/TotFinanziamento)
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -274,42 +407,42 @@ def CalcolaMutuoRataFissaAPI(UserData) :
     TotInteressiAnnuo = TotInteressiAnnuo[0:AnniTotCalc+1]
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €" ])
+        columns =[Dictionary["OutNRata"], Dictionary["OutAnno"], Dictionary["OutCapitale"], Dictionary["OutCapitale"], Dictionary["OutInteresse"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
     OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €"])
+        columns =[Dictionary["OutAnno"], Dictionary["OutCapMedioAnnuo"], Dictionary["OutIntMedioAnnuo"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"]])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
     OutputAvgMutuo = pd.DataFrame(list(zip(AnniMediaTot, CapitaleMedioAnniTot, InteresseMedioAnniTot)),
-        columns =["Anni", "Capitale medio €", "Interesse medio €"])
+        columns =[Dictionary["OutAnni"], Dictionary["OutCapMedio"], Dictionary["OutIntMedio"]])
 
     OutputAvgMutuo = OutputAvgMutuo.round(1)
 
     OVdata = {
-        "Finanziamento €" : round(TotFinanziamento,0),
-        "Anni Tasso Fisso " : AnniTotCalc,
-        "Tasso %" : round(TassoTot*100,2),
-        "Rimborso Capitale %" : round(Tilgung*100,2),
-        "Rata €" : round(Rata[1],1),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0),
-        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        Dictionary["OutFinanziamento"] : round(TotFinanziamento,0),
+        Dictionary["UserInAnniTotTasso"] : AnniTotCalc,
+        Dictionary["OutTasso"] : round(TassoTot*100,2),
+        Dictionary["OutAmmortamento"] : round(Tilgung*100,2),
+        Dictionary["OutCapitale"] : round(Rata[1],1),
+        Dictionary["OutTotCapResiduo"] : round(MaxiRataFinale,0),
+        Dictionary["OutTotIntPagati"] : round(TotInteressiFinale,0),
 
     }
 
-    TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
-    In_AnniTotTassoList = ["Anni Tasso Fisso " , AnniTotCalc]
-    TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
-    TilgungList = ["Rimborso Capitale %" , round(Tilgung*100,2)]
-    RataList = ["Rata €", round(Rata[1],1)]
-    MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
-    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(TotFinanziamento,0)]
+    In_AnniTotTassoList = [Dictionary["UserInAnniTotTasso"] , AnniTotCalc]
+    TassoTotList = [Dictionary["OutTasso"] , round(TassoTot*100,2)]
+    TilgungList = [Dictionary["OutAmmortamento"] , round(Tilgung*100,2)]
+    RataList = [Dictionary["OutCapitale"], round(Rata[1],1)]
+    MaxiRataFinaleList = [Dictionary["OutTotCapResiduo"] , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = [Dictionary["OutTotIntPagati"] , round(TotInteressiFinale,0)]
 
 
     OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, MaxiRataFinaleList, TotInteressiFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
+        columns =[Dictionary["OutFinanziamento"], Dictionary["UserInAnniTotTasso"], Dictionary["OutTasso"], Dictionary["OutAmmortamento"], Dictionary["OutCapitale"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
@@ -324,11 +457,13 @@ def CalcolaMutuoRimborsoCapAPI(UserData) :
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
 
-    TotFinanziamento = float(UserData["Finanziamento"])
+    Dictionary = LanguageDict(UserData)
+
+    TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
     In_Tilgung = float(UserData["Rimborso Capitale"])
-    In_Tasso = float(UserData["Tasso di Interesse"])
+    In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
-    In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
+    In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
     In_AnniTotCalc = In_AnniTotTasso
     RateTotali = int(In_AnniTotCalc*12)
     RataFinale = int(In_AnniTotTasso*12)
@@ -401,7 +536,7 @@ def CalcolaMutuoRimborsoCapAPI(UserData) :
             if In_AnniTotCalc>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:In_AnniTotTasso]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[11:In_AnniTotTasso]))
-                AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
+                AnniMediaTot.append("11-" + UserData[Dictionary["UserInAnniTotTasso"]] )
 
 
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -409,41 +544,41 @@ def CalcolaMutuoRimborsoCapAPI(UserData) :
 
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €" ])
+        columns =[Dictionary["OutNRata"], Dictionary["OutAnno"], Dictionary["OutCapitale"], Dictionary["OutCapitale"], Dictionary["OutInteresse"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
     OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €"])
+        columns =[Dictionary["OutAnno"], Dictionary["OutCapMedioAnnuo"], Dictionary["OutIntMedioAnnuo"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"]])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
     OutputAvgMutuo = pd.DataFrame(list(zip(AnniMediaTot, CapitaleMedioAnniTot, InteresseMedioAnniTot)),
-        columns =["Anni", "Capitale medio €", "Interesse medio €"])
+        columns =[Dictionary["OutAnni"], Dictionary["OutCapMedio"], Dictionary["OutIntMedio"]])
 
     OutputAvgMutuo = OutputAvgMutuo.round(1)
 
     OVdata = {
-        "Finanziamento €" : round(TotFinanziamento,0),
-        "Anni Tasso Fisso " : In_AnniTotTasso,
-        "Tasso %" : round(TassoTot*100,2),
-        "Rimborso Capitale %" : round(In_Tilgung,2),
-        "Rata €" : round(Rata[1],1),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0),
-        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        Dictionary["OutFinanziamento"] : round(TotFinanziamento,0),
+        Dictionary["UserInAnniTotTasso"] : In_AnniTotTasso,
+        Dictionary["OutTasso"] : round(TassoTot*100,2),
+        Dictionary["OutAmmortamento"] : round(In_Tilgung,2),
+        Dictionary["OutCapitale"] : round(Rata[1],1),
+        Dictionary["OutTotCapResiduo"] : round(MaxiRataFinale,0),
+        Dictionary["OutTotIntPagati"] : round(TotInteressiFinale,0),
     }
 
-    TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
-    In_AnniTotTassoList = ["Anni Tasso Fisso " , In_AnniTotTasso]
-    TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
-    TilgungList = ["Rimborso Capitale %" , round(In_Tilgung,2)]
-    RataList = ["Rata €", round(Rata[1],1)]
-    MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
-    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(TotFinanziamento,0)]
+    In_AnniTotTassoList = [Dictionary["UserInAnniTotTasso"] , In_AnniTotTasso]
+    TassoTotList = [Dictionary["OutTasso"] , round(TassoTot*100,2)]
+    TilgungList = [Dictionary["OutAmmortamento"] , round(In_Tilgung,2)]
+    RataList = [Dictionary["OutCapitale"], round(Rata[1],1)]
+    MaxiRataFinaleList = [Dictionary["OutTotCapResiduo"] , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = [Dictionary["OutTotIntPagati"] , round(TotInteressiFinale,0)]
 
 
     OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, MaxiRataFinaleList, TotInteressiFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
+        columns =[Dictionary["OutFinanziamento"], Dictionary["UserInAnniTotTasso"], Dictionary["OutTasso"], Dictionary["OutAmmortamento"], Dictionary["OutCapitale"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
@@ -458,15 +593,17 @@ def CalcolaMutuoAnniCalcAPIDE(UserData) :
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
 
-    TotFinanziamento = float(UserData["Finanziamento"])
-    In_AnniTotCalc = int(UserData["Anni per Calcolo Mutuo"])
+    Dictionary = LanguageDict(UserData)
+
+    TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
+    In_AnniTotCalc = int(UserData[Dictionary["UserAnniCalcMutuo"]])
     RateTotali = int(In_AnniTotCalc*12)
-    In_Tasso = float(UserData["Tasso di Interesse"])
+    In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
-    In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
+    In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
     RataFinale = int(In_AnniTotTasso*12)
-    In_MaxiRata = float(UserData["Maxi-Rata Annuale"])
-    In_MesiPreMaxiRata = int(UserData["N° Mensilitá prima della Maxi-Rata"])
+    In_MaxiRata = float(UserData[Dictionary["UserInMaxiRataAnnuale"]])
+    In_MesiPreMaxiRata = int(UserData[Dictionary["UserInMeseMaxiRata"]])
     
     # Inizializza liste
     NumRata = [i for i in range(0,RateTotali+1)]
@@ -555,7 +692,7 @@ def CalcolaMutuoAnniCalcAPIDE(UserData) :
             if In_AnniTotTasso>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:In_AnniTotTasso]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[11:In_AnniTotTasso]))
-                AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
+                AnniMediaTot.append("11-" + UserData[Dictionary["UserInAnniTotTasso"]] )
 
     Tilgung = float((Rata[1]-TassoTot*TotFinanziamento/12)*12/TotFinanziamento)
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -580,46 +717,46 @@ def CalcolaMutuoAnniCalcAPIDE(UserData) :
 
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi, MaxiRataAnnuale)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €" ])
+        columns =[Dictionary["OutNRata"], Dictionary["OutAnno"], Dictionary["OutCapitale"], Dictionary["OutCapitale"], Dictionary["OutInteresse"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"], Dictionary["OutMaxiRataAnnuale"] ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
     OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo, MaxiRataAnnualeAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €"])
+        columns =[Dictionary["OutAnno"], Dictionary["OutCapMedioAnnuo"], Dictionary["OutIntMedioAnnuo"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"], Dictionary["OutMaxiRataAnnuale"]])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
     OutputAvgMutuo = pd.DataFrame(list(zip(AnniMediaTot, CapitaleMedioAnniTot, InteresseMedioAnniTot)),
-        columns =["Anni", "Capitale medio €", "Interesse medio €"])
+        columns =[Dictionary["OutAnni"], Dictionary["OutCapMedio"], Dictionary["OutIntMedio"]])
 
     OutputAvgMutuo = OutputAvgMutuo.round(1)
 
     OVdata = {
-        "Finanziamento €" : round(TotFinanziamento,0),
-        "Anni Tasso Fisso " : In_AnniTotTasso,
-        "Tasso %" : round(TassoTot*100,2),
-        "Rimborso Capitale %" : round(Tilgung*100,2),
-        "Rata €" : round(Rata[1],1),
-        "Maxi-Rata Annuale €" : round(In_MaxiRata,0),
-        "Tot Maxi-Rata Annuale €" : round(TotMaxiRataAnnualeFinale,0),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0),
-        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        Dictionary["OutFinanziamento"] : round(TotFinanziamento,0),
+        Dictionary["UserInAnniTotTasso"] : In_AnniTotTasso,
+        Dictionary["OutTasso"] : round(TassoTot*100,2),
+        Dictionary["OutAmmortamento"] : round(Tilgung*100,2),
+        Dictionary["OutCapitale"] : round(Rata[1],1),
+        Dictionary["OutMaxiRataAnnuale"] : round(In_MaxiRata,0),
+        Dictionary["OutTotMaxiRata"] : round(TotMaxiRataAnnualeFinale,0),
+        Dictionary["OutTotCapResiduo"] : round(MaxiRataFinale,0),
+        Dictionary["OutTotIntPagati"] : round(TotInteressiFinale,0),
         
     }
 
-    TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
-    In_AnniTotTassoList = ["Anni Tasso Fisso " , In_AnniTotTasso]
-    TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
-    TilgungList = ["Rimborso Capitale %" , round(Tilgung*100,2)]
-    RataList = ["Rata €", round(Rata[1],1)]
-    In_MaxiRataList = ["Maxi-Rata Annuale €" , round(In_MaxiRata,0)]
-    TotMaxiRataAnnualeFinaleList = ["Tot Maxi-Rata Annuale €" , round(TotMaxiRataAnnualeFinale,0)]
-    MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
-    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(TotFinanziamento,0)]
+    In_AnniTotTassoList = [Dictionary["UserInAnniTotTasso"] , In_AnniTotTasso]
+    TassoTotList = [Dictionary["OutTasso"] , round(TassoTot*100,2)]
+    TilgungList = [Dictionary["OutAmmortamento"] , round(Tilgung*100,2)]
+    RataList = [Dictionary["OutCapitale"], round(Rata[1],1)]
+    In_MaxiRataList = [Dictionary["OutMaxiRataAnnuale"] , round(In_MaxiRata,0)]
+    TotMaxiRataAnnualeFinaleList = [Dictionary["OutTotMaxiRata"] , round(TotMaxiRataAnnualeFinale,0)]
+    MaxiRataFinaleList = [Dictionary["OutTotCapResiduo"] , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = [Dictionary["OutTotIntPagati"] , round(TotInteressiFinale,0)]
 
 
     OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, In_MaxiRataList, TotMaxiRataAnnualeFinaleList, MaxiRataFinaleList, TotInteressiFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Maxi-Rata Annuale €", "Tot Maxi-Rata Annuale €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
+        columns =[Dictionary["OutFinanziamento"], Dictionary["UserInAnniTotTasso"], Dictionary["OutTasso"], Dictionary["OutAmmortamento"], Dictionary["OutCapitale"], Dictionary["OutMaxiRataAnnuale"], Dictionary["OutTotMaxiRata"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
@@ -634,16 +771,18 @@ def CalcolaMutuoRataFissaAPIDE(UserData) :
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
 
-    TotFinanziamento = float(UserData["Finanziamento"])
-    In_Rata = float(UserData["Rata"])
-    In_Tasso = float(UserData["Tasso di Interesse"])
+    Dictionary = LanguageDict(UserData)
+
+    TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
+    In_Rata = float(UserData[Dictionary["UserInRata"]])
+    In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
-    In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
+    In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
     In_AnniTotCalc = In_AnniTotTasso
     RateTotali = int(In_AnniTotCalc*12)
     RataFinale = int(In_AnniTotTasso*12)
-    In_MaxiRata = float(UserData["Maxi-Rata Annuale"])
-    In_MesiPreMaxiRata = int(UserData["N° Mensilitá prima della Maxi-Rata"])
+    In_MaxiRata = float(UserData[Dictionary["UserInMaxiRataAnnuale"]])
+    In_MesiPreMaxiRata = int(UserData[Dictionary["UserInMeseMaxiRata"]])
 
     # Inizializza liste
     NumRata = [i for i in range(0,RateTotali+1)]
@@ -750,7 +889,7 @@ def CalcolaMutuoRataFissaAPIDE(UserData) :
             if AnniTotCalc>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:AnniTotCalc]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[1:AnniTotCalc]))
-                AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
+                AnniMediaTot.append("11-" + UserData[Dictionary["UserInAnniTotTasso"]] )
 
     Tilgung = float((Rata[1]-TassoTot*TotFinanziamento/12)*12/TotFinanziamento)
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -775,46 +914,46 @@ def CalcolaMutuoRataFissaAPIDE(UserData) :
     MaxiRataAnnualeAnnuo = MaxiRataAnnualeAnnuo[0:AnniTotCalc+1]
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi, MaxiRataAnnuale)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €" ])
+        columns =[Dictionary["OutNRata"], Dictionary["OutAnno"], Dictionary["OutCapitale"], Dictionary["OutCapitale"], Dictionary["OutInteresse"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"], Dictionary["OutMaxiRataAnnuale"] ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
     OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo, MaxiRataAnnualeAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €"])
+        columns =[Dictionary["OutAnno"], Dictionary["OutCapMedioAnnuo"], Dictionary["OutIntMedioAnnuo"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"], Dictionary["OutMaxiRataAnnuale"]])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
     OutputAvgMutuo = pd.DataFrame(list(zip(AnniMediaTot, CapitaleMedioAnniTot, InteresseMedioAnniTot)),
-        columns =["Anni", "Capitale medio €", "Interesse medio €"])
+        columns =[Dictionary["OutAnni"], Dictionary["OutCapMedio"], Dictionary["OutIntMedio"]])
 
     OutputAvgMutuo = OutputAvgMutuo.round(1)
 
     OVdata = {
-        "Finanziamento €" : round(TotFinanziamento,0),
-        "Anni Tasso Fisso " : In_AnniTotTasso,
-        "Tasso %" : round(TassoTot*100,2),
-        "Rimborso Capitale %" : round(Tilgung*100,2),
-        "Rata €" : round(Rata[1],1),
-        "Maxi-Rata Annuale €" : round(In_MaxiRata,0),
-        "Tot Maxi-Rata Annuale €" : round(TotMaxiRataAnnualeFinale,0),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0),
-        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        Dictionary["OutFinanziamento"] : round(TotFinanziamento,0),
+        Dictionary["UserInAnniTotTasso"] : In_AnniTotTasso,
+        Dictionary["OutTasso"] : round(TassoTot*100,2),
+        Dictionary["OutAmmortamento"] : round(Tilgung*100,2),
+        Dictionary["OutCapitale"] : round(Rata[1],1),
+        Dictionary["OutMaxiRataAnnuale"] : round(In_MaxiRata,0),
+        Dictionary["OutTotMaxiRata"] : round(TotMaxiRataAnnualeFinale,0),
+        Dictionary["OutTotCapResiduo"] : round(MaxiRataFinale,0),
+        Dictionary["OutTotIntPagati"] : round(TotInteressiFinale,0),
         
     }
 
-    TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
-    In_AnniTotTassoList = ["Anni Tasso Fisso " , In_AnniTotTasso]
-    TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
-    TilgungList = ["Rimborso Capitale %" , round(Tilgung*100,2)]
-    RataList = ["Rata €", round(Rata[1],1)]
-    In_MaxiRataList = ["Maxi-Rata Annuale €" , round(In_MaxiRata,0)]
-    TotMaxiRataAnnualeFinaleList = ["Tot Maxi-Rata Annuale €" , round(TotMaxiRataAnnualeFinale,0)]
-    MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
-    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(TotFinanziamento,0)]
+    In_AnniTotTassoList = [Dictionary["UserInAnniTotTasso"] , In_AnniTotTasso]
+    TassoTotList = [Dictionary["OutTasso"] , round(TassoTot*100,2)]
+    TilgungList = [Dictionary["OutAmmortamento"] , round(Tilgung*100,2)]
+    RataList = [Dictionary["OutCapitale"], round(Rata[1],1)]
+    In_MaxiRataList = [Dictionary["OutMaxiRataAnnuale"] , round(In_MaxiRata,0)]
+    TotMaxiRataAnnualeFinaleList = [Dictionary["OutTotMaxiRata"] , round(TotMaxiRataAnnualeFinale,0)]
+    MaxiRataFinaleList = [Dictionary["OutTotCapResiduo"] , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = [Dictionary["OutTotIntPagati"] , round(TotInteressiFinale,0)]
 
 
     OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, In_MaxiRataList, TotMaxiRataAnnualeFinaleList, MaxiRataFinaleList, TotInteressiFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Maxi-Rata Annuale €", "Tot Maxi-Rata Annuale €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
+        columns =[Dictionary["OutFinanziamento"], Dictionary["UserInAnniTotTasso"], Dictionary["OutTasso"], Dictionary["OutAmmortamento"], Dictionary["OutCapitale"], Dictionary["OutMaxiRataAnnuale"], Dictionary["OutTotMaxiRata"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
@@ -829,16 +968,18 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
 
-    TotFinanziamento = float(UserData["Finanziamento"])
+    Dictionary = LanguageDict(UserData)
+
+    TotFinanziamento = float(UserData[Dictionary["UserFinanziamento"]])
     In_Tilgung = float(UserData["Rimborso Capitale"])
-    In_Tasso = float(UserData["Tasso di Interesse"])
+    In_Tasso = float(UserData[Dictionary["UserInTasso"]])
     TassoTot = float(In_Tasso/100)
-    In_AnniTotTasso = int(UserData["Durata Anni Tasso Fisso"])
+    In_AnniTotTasso = int(UserData[Dictionary["UserInAnniTotTasso"]])
     In_AnniTotCalc = In_AnniTotTasso
     RateTotali = int(In_AnniTotCalc*12)
     RataFinale = int(In_AnniTotTasso*12)
-    In_MaxiRata = float(UserData["Maxi-Rata Annuale"])
-    In_MesiPreMaxiRata = int(UserData["N° Mensilitá prima della Maxi-Rata"])
+    In_MaxiRata = float(UserData[Dictionary["UserInMaxiRataAnnuale"]])
+    In_MesiPreMaxiRata = int(UserData[Dictionary["UserInMeseMaxiRata"]])
     # print("In_MaxiRata: ", In_MaxiRata)
     # print("In_MesiPreMaxiRata: ", In_MesiPreMaxiRata)
 
@@ -942,7 +1083,7 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
             if In_AnniTotCalc>10:
                 CapitaleMedioAnniTot.append(np.mean(CapitaleMedioAnnuo[11:In_AnniTotTasso]))
                 InteresseMedioAnniTot.append(np.mean(InteresseMedioAnnuo[1:In_AnniTotTasso]))
-                AnniMediaTot.append("11-" + UserData["Durata Anni Tasso Fisso"] )
+                AnniMediaTot.append("11-" + UserData[Dictionary["UserInAnniTotTasso"]] )
 
 
     MaxiRataFinale = float(TotCapRimanente[RataFinale])
@@ -950,46 +1091,46 @@ def CalcolaMutuoRimborsoCapAPIDE(UserData) :
     TotInteressiFinale = float(TotInteressi[RataFinale])
 
     OutputsMutuo = pd.DataFrame(list(zip(NumRata, AnniRata, Rata, CapitalePerRata, InteressePerRata, TotCapRimanente, TotInteressi, MaxiRataAnnuale)),
-        columns =["N° Rata", "Anno", "Rata €", "Capitale €", "Interesse €", "Tot. Capitale da ripagare €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €" ])
+        columns =[Dictionary["OutNRata"], Dictionary["OutAnno"], Dictionary["OutCapitale"], Dictionary["OutCapitale"], Dictionary["OutInteresse"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"], Dictionary["OutMaxiRataAnnuale"] ])
             
     OutputsMutuo = OutputsMutuo.round(1)
 
     OutputsAnnuoMutuo = pd.DataFrame(list(zip(AnniRataAnnuo, CapitaleMedioAnnuo, InteresseMedioAnnuo, TotCapRimanenteAnnuo, TotInteressiAnnuo, MaxiRataAnnualeAnnuo)),
-        columns =["Anno", "Capitale medio annuo €", "Interesse medio annuo €", "Tot. Capitale rimanente €", "Tot. Interessi pagati €", "Maxi-Rata Annuale €"])
+        columns =[Dictionary["OutAnno"], Dictionary["OutCapMedioAnnuo"], Dictionary["OutIntMedioAnnuo"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"], Dictionary["OutMaxiRataAnnuale"]])
 
     OutputsAnnuoMutuo = OutputsAnnuoMutuo.round(1)
 
     OutputAvgMutuo = pd.DataFrame(list(zip(AnniMediaTot, CapitaleMedioAnniTot, InteresseMedioAnniTot)),
-        columns =["Anni", "Capitale medio €", "Interesse medio €"])
+        columns =[Dictionary["OutAnni"], Dictionary["OutCapMedio"], Dictionary["OutIntMedio"]])
 
     OutputAvgMutuo = OutputAvgMutuo.round(1)
 
     OVdata = {
-        "Finanziamento €" : round(TotFinanziamento,0),
-        "Anni Tasso Fisso " : In_AnniTotTasso,
-        "Tasso %" : round(TassoTot*100,2),
-        "Rimborso Capitale %" : round(In_Tilgung,2),
-        "Rata €" : round(Rata[1],1),
-        "Maxi-Rata Annuale €" : round(In_MaxiRata,0),
-        "Tot Maxi-Rata Annuale €" : round(TotMaxiRataAnnualeFinale,0),
-        "Capitale Rimanente €" : round(MaxiRataFinale,0),
-        "Tot Interessi Pagati €" : round(TotInteressiFinale,0),
+        Dictionary["OutFinanziamento"] : round(TotFinanziamento,0),
+        Dictionary["UserInAnniTotTasso"] : In_AnniTotTasso,
+        Dictionary["OutTasso"] : round(TassoTot*100,2),
+        Dictionary["OutAmmortamento"] : round(In_Tilgung,2),
+        Dictionary["OutCapitale"] : round(Rata[1],1),
+        Dictionary["OutMaxiRataAnnuale"] : round(In_MaxiRata,0),
+        Dictionary["OutTotMaxiRata"] : round(TotMaxiRataAnnualeFinale,0),
+        Dictionary["OutTotCapResiduo"] : round(MaxiRataFinale,0),
+        Dictionary["OutTotIntPagati"] : round(TotInteressiFinale,0),
         
     }
 
-    TotFinanziamentoList = ["Finanziamento €" , round(TotFinanziamento,0)]
-    In_AnniTotTassoList = ["Anni Tasso Fisso " , In_AnniTotTasso]
-    TassoTotList = ["Tasso %" , round(TassoTot*100,2)]
-    TilgungList = ["Rimborso Capitale %" , round(In_Tilgung,2)]
-    RataList = ["Rata €", round(Rata[1],1)]
-    In_MaxiRataList = ["Maxi-Rata Annuale €" , round(In_MaxiRata,0)]
-    TotMaxiRataAnnualeFinaleList = ["Tot Maxi-Rata Annuale €" , round(TotMaxiRataAnnualeFinale,0)]
-    MaxiRataFinaleList = ["Capitale Rimanente €" , round(MaxiRataFinale,0)]
-    TotInteressiFinaleList = ["Tot Interessi Pagati €" , round(TotInteressiFinale,0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(TotFinanziamento,0)]
+    In_AnniTotTassoList = [Dictionary["UserInAnniTotTasso"] , In_AnniTotTasso]
+    TassoTotList = [Dictionary["OutTasso"] , round(TassoTot*100,2)]
+    TilgungList = [Dictionary["OutAmmortamento"] , round(In_Tilgung,2)]
+    RataList = [Dictionary["OutCapitale"], round(Rata[1],1)]
+    In_MaxiRataList = [Dictionary["OutMaxiRataAnnuale"] , round(In_MaxiRata,0)]
+    TotMaxiRataAnnualeFinaleList = [Dictionary["OutTotMaxiRata"] , round(TotMaxiRataAnnualeFinale,0)]
+    MaxiRataFinaleList = [Dictionary["OutTotCapResiduo"] , round(MaxiRataFinale,0)]
+    TotInteressiFinaleList = [Dictionary["OutTotIntPagati"] , round(TotInteressiFinale,0)]
 
 
     OutputOverviewMutuo = pd.DataFrame(list(zip(TotFinanziamentoList, In_AnniTotTassoList, TassoTotList, TilgungList, RataList, In_MaxiRataList, TotMaxiRataAnnualeFinaleList, MaxiRataFinaleList, TotInteressiFinaleList )),
-        columns =["Finanziamento €", "Anni Tasso Fisso", "Tasso %", "Rimborso %", "Rata €", "Maxi-Rata Annuale €", "Tot Maxi-Rata Annuale €", "Capitale Rimanente €", "Tot Interessi Pagati €" ])
+        columns =[Dictionary["OutFinanziamento"], Dictionary["UserInAnniTotTasso"], Dictionary["OutTasso"], Dictionary["OutAmmortamento"], Dictionary["OutCapitale"], Dictionary["OutMaxiRataAnnuale"], Dictionary["OutTotMaxiRata"], Dictionary["OutTotCapResiduo"], Dictionary["OutTotIntPagati"] ])
 
     OutputOverviewMutuo2 = pd.DataFrame(OVdata, index=["Val"])
     OutputOverviewMutuo = OutputOverviewMutuo.T
@@ -1004,98 +1145,100 @@ def CalcolaCashIniziale(UserData) :
         UserData[key] = UserData[key].strip("€")
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
-        
-    Finanziamento = float(UserData["Prezzo Immobile"])*float(UserData["Percentuale Mutuo"])*0.01
+    
+    Dictionary = LanguageDict(UserData)
 
-    if float(UserData["Spese di Istruttoria"])>=0 and float(UserData["Spese di Istruttoria"])<=2:
+    Finanziamento = float(UserData[Dictionary["UserInPrezzo"]])*float(UserData[Dictionary["UserInPercMutuo"]])*0.01
+
+    if float(UserData[Dictionary["UserInIstruttoria"]])>=0 and float(UserData[Dictionary["UserInIstruttoria"]])<=2:
         IstruttoriaType = "percentuale"
-        Istruttoria = float(UserData["Spese di Istruttoria"])*0.01*(Finanziamento)
-    elif float(UserData["Spese di Istruttoria"])>=50:
+        Istruttoria = float(UserData[Dictionary["UserInIstruttoria"]])*0.01*(Finanziamento)
+    elif float(UserData[Dictionary["UserInIstruttoria"]])>=50:
         IstruttoriaType = "fissa"
-        Istruttoria = float(UserData["Spese di Istruttoria"])
+        Istruttoria = float(UserData[Dictionary["UserInIstruttoria"]])
     else:
         IstruttoriaType = "fissa"
         Istruttoria = 0.0
 
-    if "Prima" in UserData["Tipologia Acquisto"]:
+    if "Prima" in UserData[Dictionary["UserInTipAcquisto"]]:
         Sostitutiva = 0.25
         SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
-        if "Privato" in UserData["Tipologia Acquisto"]:
+        if "Privato" in UserData[Dictionary["UserInTipAcquisto"]]:
             Registro = 2
-            SpesaRegistro = Registro*0.01*float(UserData["Prezzo Immobile"])
+            SpesaRegistro = Registro*0.01*float(UserData[Dictionary["UserInPrezzo"]])
             if SpesaRegistro <1000:
                 SpesaRegistro = 1000
             SpesaIpotecaria = 50
             SpesaCatastale = 50
             IVA = 0
-            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
-        elif "Costruttore" in UserData["Tipologia Acquisto"]:
+            SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
+        elif "Costruttore" in UserData[Dictionary["UserInTipAcquisto"]]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
             IVA = 4
-            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
-    elif "Seconda" in UserData["Tipologia Acquisto"]:
+            SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
+    elif "Seconda" in UserData[Dictionary["UserInTipAcquisto"]]:
         Sostitutiva = 2
         SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
-        if "Privato" in UserData["Tipologia Acquisto"]:
+        if "Privato" in UserData[Dictionary["UserInTipAcquisto"]]:
             Registro = 9
-            SpesaRegistro = Registro*0.01*float(UserData["Prezzo Immobile"])
+            SpesaRegistro = Registro*0.01*float(UserData[Dictionary["UserInPrezzo"]])
             if SpesaRegistro <1000:
                 SpesaRegistro = 1000
             SpesaIpotecaria = 50
             SpesaCatastale = 50
             IVA = 0
-            SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
-        elif "Costruttore" in UserData["Tipologia Acquisto"]:
+            SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
+        elif "Costruttore" in UserData[Dictionary["UserInTipAcquisto"]]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
-            if "Lusso" in UserData["Tipologia Acquisto"]:
+            if "Lusso" in UserData[Dictionary["UserInTipAcquisto"]]:
                 IVA = 22
-                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
+                SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
             else:
                 IVA = 10
-                SpesaIVA = IVA*float(UserData["Prezzo Immobile"])*0.01
+                SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
 
 
     SpeseIniziali = {
-        "PrezzoImmobile €" : float(UserData["Prezzo Immobile"]),
+        "PrezzoImmobile €" : float(UserData[Dictionary["UserInPrezzo"]]),
         "TotFinanziamento €" : Finanziamento,
-        "CostoAgenzia" : float(UserData["Percentuale Agenzia"])*0.01*float(UserData["Prezzo Immobile"]),
+        "CostoAgenzia" : float(UserData[Dictionary["UserInPercAgenzia"]])*0.01*float(UserData[Dictionary["UserInPrezzo"]]),
         "CostoIstruttoria" : Istruttoria,
         "CostoSostitutiva" : SpesaSostitutiva,
-        "CostoPerizia" : float(UserData["Spese di Perizia"]),
-        "CostoAssicurazioni" : float(UserData["Assicurazioni"]),
+        "CostoPerizia" : float(UserData[Dictionary["UserInPerizia"]]),
+        "CostoAssicurazioni" : float(UserData[Dictionary["UserInAssicurazione"]]),
         "CostoNotaio" : SpesaRegistro + SpesaIpotecaria + SpesaCatastale,
         "CostoIVA" : SpesaIVA
     }
 
     SpeseIniziali["TotCosti"] = SpeseIniziali["CostoAgenzia"] + SpeseIniziali["CostoNotaio"] + SpeseIniziali["CostoIstruttoria"] + SpeseIniziali["CostoSostitutiva"] + SpeseIniziali["CostoPerizia"] + SpeseIniziali["CostoAssicurazioni"] + SpeseIniziali["CostoIVA"]
-    SpeseIniziali["AnticipoMutuo"] = float(UserData["Prezzo Immobile"])-Finanziamento
+    SpeseIniziali["AnticipoMutuo"] = float(UserData[Dictionary["UserInPrezzo"]])-Finanziamento
     SpeseIniziali["SpesaTotIniziale"] = SpeseIniziali["TotCosti"] + SpeseIniziali["AnticipoMutuo"]
     
-    PrezzoImmobileList = ["Prezzo Immobile €" , round(SpeseIniziali["PrezzoImmobile €"],0)]
-    TotFinanziamentoList = ["Tot. Finanziamento €" , round(SpeseIniziali["TotFinanziamento €"],0)]
-    CostoAgenziaList = ["Parcella Agenzia €" , round(SpeseIniziali["CostoAgenzia"],0)]
-    CostoIstruttoriaList = ["Spesa di Istruttoria €" , round(SpeseIniziali["CostoIstruttoria"],0)]
-    CostoSostitutivaList = ["Imposta Sostitutiva €" , round(SpeseIniziali["CostoSostitutiva"],0)]
-    CostoPeriziaList = ["Costo Perizia €" , round(SpeseIniziali["CostoPerizia"],0)]
-    CostoAssicurazioniList = ["Costo Assicurazioni €" , round(SpeseIniziali["CostoAssicurazioni"],0)]
-    CostoNotaioList = ["Costi Notarili €" , round(SpeseIniziali["CostoNotaio"],0)]
-    CostoIVAList = ["IVA €" , round(SpeseIniziali["CostoIVA"],0)]
+    PrezzoImmobileList = [Dictionary["OutPrezzo"] , round(SpeseIniziali["PrezzoImmobile €"],0)]
+    TotFinanziamentoList = [Dictionary["OutFinanziamento"] , round(SpeseIniziali["TotFinanziamento €"],0)]
+    CostoAgenziaList = [Dictionary["OutAgenzia"] , round(SpeseIniziali["CostoAgenzia"],0)]
+    CostoIstruttoriaList = [Dictionary["OutIstruttoria"] , round(SpeseIniziali["CostoIstruttoria"],0)]
+    CostoSostitutivaList = [Dictionary["OutSostitutiva"] , round(SpeseIniziali["CostoSostitutiva"],0)]
+    CostoPeriziaList = [Dictionary["OutPerizia"] , round(SpeseIniziali["CostoPerizia"],0)]
+    CostoAssicurazioniList = [Dictionary["OutAssicurazioni"] , round(SpeseIniziali["CostoAssicurazioni"],0)]
+    CostoNotaioList = [Dictionary["OutNotaio"] , round(SpeseIniziali["CostoNotaio"],0)]
+    CostoIVAList = [Dictionary["OutIVA"] , round(SpeseIniziali["CostoIVA"],0)]
 
-    TipologiaAcquistoList = ["Tip. Acquisto", UserData["Tipologia Acquisto"]]
-    PercFinanziamentoList = ["Percentuale Mutuo %", float(UserData["Percentuale Mutuo"])]
-    ImpostaRegistroList = ["Di cui Imposta di Registro", SpesaRegistro]
-    ImpostaIpotecariaList = ["Di cui Imposta Ipotecaria", SpesaIpotecaria]
-    ImpostaCatastaleList = ["Di cui Imposta Catastale", SpesaCatastale]
+    TipologiaAcquistoList = [Dictionary["OutTipo"], UserData[Dictionary["UserInTipAcquisto"]]]
+    PercFinanziamentoList = [Dictionary["OutPercMutuo"], float(UserData[Dictionary["UserInPercMutuo"]])]
+    ImpostaRegistroList = [Dictionary["OutRegistro"], SpesaRegistro]
+    ImpostaIpotecariaList = [Dictionary["OutIpotecaria"], SpesaIpotecaria]
+    ImpostaCatastaleList = [Dictionary["OutCatastale"], SpesaCatastale]
 
 
 
 
     OutputsSpeseInizialiDettaglio = pd.DataFrame(list(zip(PrezzoImmobileList, TipologiaAcquistoList, PercFinanziamentoList, TotFinanziamentoList, CostoAgenziaList, CostoIstruttoriaList, CostoSostitutivaList, CostoPeriziaList, CostoAssicurazioniList, CostoNotaioList, ImpostaRegistroList, ImpostaIpotecariaList, ImpostaCatastaleList, CostoIVAList )),
-        columns =["Prezzo Immobile €", "Tip. Acquisto", "Percentuale Mutuo", "Tot. Finanziamento €", "Parcella Agenzia €", "Spesa di Istruttoria €", "Imposta Sostitutiva €", "Costo Perizia €", "Costo Assicurazioni €", "Costi Notarili €", "Di cui Imposta di Registro", "Di cui Imposta Ipotecaria", "Di cui Imposta Catastale", "IVA €"])
+        columns =[Dictionary["OutPrezzo"], Dictionary["OutTipo"], Dictionary["UserInPercMutuo"], Dictionary["OutFinanziamento"], Dictionary["OutAgenzia"], Dictionary["OutIstruttoria"], Dictionary["OutSostitutiva"], Dictionary["OutPerizia"], Dictionary["OutAssicurazioni"], Dictionary["OutNotaio"], Dictionary["OutRegistro"], Dictionary["OutIpotecaria"], Dictionary["OutCatastale"], Dictionary["OutIVA"]])
 
     OutputsSpeseInizialiDettaglio = OutputsSpeseInizialiDettaglio.T
 
@@ -1110,15 +1253,17 @@ def CalcolaCashInizialeDE(UserData) :
         UserData[key] = UserData[key].strip("€")
         UserData[key] = UserData[key].strip("%")
         UserData[key] = UserData[key].replace(",","")
-    print(UserData)
-    Grunderwerbsteuer = float(UserData["Grunderwerbsteuer"])*0.01*float(UserData["Prezzo Immobile"])
-    Grundbuchkosten = float(UserData["Grundbuchkosten"])*0.01*float(UserData["Prezzo Immobile"])
-    Notarkosten = float(UserData["Notarkosten"])*0.01*float(UserData["Prezzo Immobile"])
-    Maklergebueren = float(UserData["Maklergebühren"])*0.01*float(UserData["Prezzo Immobile"])
+
+    Dictionary = LanguageDict(UserData)
+
+    Grunderwerbsteuer = float(UserData[Dictionary["UserInGrunderwerbsteuer"]])*0.01*float(UserData[Dictionary["UserInPrezzo"]])
+    Grundbuchkosten = float(UserData[Dictionary["UserInGrundbuchkosten"]])*0.01*float(UserData[Dictionary["UserInPrezzo"]])
+    Notarkosten = float(UserData[Dictionary["UserInNotarkosten"]])*0.01*float(UserData[Dictionary["UserInPrezzo"]])
+    Maklergebueren = float(UserData[Dictionary["UserInMaklergebühren"]])*0.01*float(UserData[Dictionary["UserInPrezzo"]])
 
     SpeseIniziali = {
-        "Bundesland" : UserData["Bundesland"],
-        "PrezzoImmobile" : float(UserData["Prezzo Immobile"]),
+        "Bundesland" : UserData[Dictionary["UserInBundesland"]],
+        "PrezzoImmobile" : float(UserData[Dictionary["UserInPrezzo"]]),
         "Grunderwerbsteuer" : Grunderwerbsteuer,
         "Grundbuchkosten" : Grundbuchkosten,
         "Notarkosten" : Notarkosten,
@@ -1127,17 +1272,17 @@ def CalcolaCashInizialeDE(UserData) :
 
     SpeseIniziali["TotCosti"] = SpeseIniziali["Grunderwerbsteuer"] + SpeseIniziali["Grundbuchkosten"] + SpeseIniziali["Notarkosten"] + SpeseIniziali["Maklergebueren"]
     
-    RegioneList = ["Bundesland" , SpeseIniziali["Bundesland"]]
-    PrezzoImmobileList = ["Prezzo Immobile €" , round(SpeseIniziali["PrezzoImmobile"],0)]
-    SpeseTotList = ["Spese Totali €" , round(SpeseIniziali["TotCosti"],0)]
-    GrunderwerbsteurList = ["Di cui Grunderwerbsteuer €" , round(SpeseIniziali["Grunderwerbsteuer"],0)]
-    GrundbuchkostenList = ["Di cui Grundbuchkosten €" , round(SpeseIniziali["Grundbuchkosten"],0)]
-    NotarkostenList = ["Di cui Notarkosten €" , round(SpeseIniziali["Notarkosten"],0)]
-    MaklergebuerenList = ["Di cui Maklergebueren €" , round(SpeseIniziali["Maklergebueren"],0)]
+    RegioneList = [Dictionary["UserInBundesland"] , SpeseIniziali["Bundesland"]]
+    PrezzoImmobileList = [Dictionary["OutPrezzo"] , round(SpeseIniziali["PrezzoImmobile"],0)]
+    SpeseTotList = [Dictionary["OutSpeseTot"] , round(SpeseIniziali["TotCosti"],0)]
+    GrunderwerbsteurList = [Dictionary["OutGrunderwerbsteuer"] , round(SpeseIniziali["Grunderwerbsteuer"],0)]
+    GrundbuchkostenList = [Dictionary["OutGrundbuchkosten"] , round(SpeseIniziali["Grundbuchkosten"],0)]
+    NotarkostenList = [Dictionary["OutNotarkosten"] , round(SpeseIniziali["Notarkosten"],0)]
+    MaklergebuerenList = [Dictionary["OutMaklergebühren"] , round(SpeseIniziali["Maklergebueren"],0)]
 
 
     OutputsSpeseInizialiDettaglioDE = pd.DataFrame(list(zip(RegioneList, PrezzoImmobileList, SpeseTotList, GrunderwerbsteurList, GrundbuchkostenList, NotarkostenList, MaklergebuerenList)),
-        columns =["Bundesland", "Prezzo Immobile €", "Spese Totali €","Di cui Grunderwerbsteuer €", "Di cui Grundbuchkosten €", "Di cui Notarkosten €", "Di cui Maklergebueren €"])
+        columns =[Dictionary["UserInBundesland"], Dictionary["OutPrezzo"], Dictionary["OutSpeseTot"],Dictionary["OutGrunderwerbsteuer"], Dictionary["OutGrundbuchkosten"], Dictionary["OutNotarkosten"], Dictionary["OutMaklergebühren"]])
 
     OutputsSpeseInizialiDettaglioDE = OutputsSpeseInizialiDettaglioDE.T
 
@@ -1169,6 +1314,9 @@ def CalcolaIMU(InputsCasa) :
     return IMU
 
 def EurostatCall(UserData) :
+
+    Dictionary = LanguageDict(UserData)
+
     code = UserData["Grafico"]
     pars = eurostat.get_pars(code)
 
