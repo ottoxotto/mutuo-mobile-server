@@ -74,13 +74,13 @@ def LanguageDict(UserData) :
             "UserAnniCalcMutuo" : "N° of Years for Calculation",
             "UserInTasso" : "Interest Rate",
             "UserInAnniTotTasso" : "Fixed-term Duration",
-            "UserInRata" : "Monthly Payment",
+            "UserInRata" : "Installment",
             "UserInMaxiRataAnnuale" : "Annual Lump Sum Payment",
             "UserInMeseMaxiRata" : "N° Months before the Annual Lump Sum Payment",
             "UserInAmmortamento" : "Amortization Rate",
             "UserInPrezzo" : "Buying Price",
             "UserInPercMutuo" : "Loan-to-Value Ratio",
-            "UserInPercAgenzia" : "Percentage for Real Estate Agent",
+            "UserInPercAgenzia" : "Real Estate Agent Fees",
             "UserInIstruttoria" : "Processing Fees",
             "UserInAssicurazione" : "Insurance Fees",
             "UserInPerizia" : "Valuation Fees",
@@ -92,7 +92,7 @@ def LanguageDict(UserData) :
             "UserInBundesland" : "Bundesland",
             "OutNRata" : "N° Payment",
             "OutAnno" : "Year",
-            "OutRata" : "Monthly Payment €",
+            "OutRata" : "Installment €",
             "OutCapitale" : "Principal €",
             "OutInteresse" : "Interests €",
             "OutTotCapResiduo" : "Residual Principal €",
@@ -1147,6 +1147,18 @@ def CalcolaCashIniziale(UserData) :
         UserData[key] = UserData[key].replace(",","")
     
     Dictionary = LanguageDict(UserData)
+    if UserData["Language"] == "it":
+        PrimaPrivateLbl = "Prima"
+        SecondaPrivateLbl = "Seconda"
+        PrivateLbl = "Privato"
+        CostruttoreLbl = "Costruttore"
+        LussoLbl = "Lusso"
+    elif UserData["Language"] == "en":
+        PrimaPrivateLbl = "1st"
+        SecondaPrivateLbl = "2nd"
+        PrivateLbl = "Private"
+        CostruttoreLbl = "Developer"
+        LussoLbl = "Luxury"
 
     Finanziamento = float(UserData[Dictionary["UserInPrezzo"]])*float(UserData[Dictionary["UserInPercMutuo"]])*0.01
 
@@ -1160,10 +1172,11 @@ def CalcolaCashIniziale(UserData) :
         IstruttoriaType = "fissa"
         Istruttoria = 0.0
 
-    if "Prima" in UserData[Dictionary["UserInTipAcquisto"]]:
+    
+    if PrimaPrivateLbl in UserData[Dictionary["UserInTipAcquisto"]]:
         Sostitutiva = 0.25
         SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
-        if "Privato" in UserData[Dictionary["UserInTipAcquisto"]]:
+        if PrivateLbl in UserData[Dictionary["UserInTipAcquisto"]]:
             Registro = 2
             SpesaRegistro = Registro*0.01*float(UserData[Dictionary["UserInPrezzo"]])
             if SpesaRegistro <1000:
@@ -1172,16 +1185,16 @@ def CalcolaCashIniziale(UserData) :
             SpesaCatastale = 50
             IVA = 0
             SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
-        elif "Costruttore" in UserData[Dictionary["UserInTipAcquisto"]]:
+        elif CostruttoreLbl in UserData[Dictionary["UserInTipAcquisto"]]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
             IVA = 4
             SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
-    elif "Seconda" in UserData[Dictionary["UserInTipAcquisto"]]:
+    elif SecondaPrivateLbl in UserData[Dictionary["UserInTipAcquisto"]]:
         Sostitutiva = 2
         SpesaSostitutiva = Sostitutiva*Finanziamento*0.01
-        if "Privato" in UserData[Dictionary["UserInTipAcquisto"]]:
+        if PrivateLbl in UserData[Dictionary["UserInTipAcquisto"]]:
             Registro = 9
             SpesaRegistro = Registro*0.01*float(UserData[Dictionary["UserInPrezzo"]])
             if SpesaRegistro <1000:
@@ -1190,11 +1203,11 @@ def CalcolaCashIniziale(UserData) :
             SpesaCatastale = 50
             IVA = 0
             SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
-        elif "Costruttore" in UserData[Dictionary["UserInTipAcquisto"]]:
+        elif CostruttoreLbl in UserData[Dictionary["UserInTipAcquisto"]]:
             SpesaRegistro = 200
             SpesaIpotecaria = 200
             SpesaCatastale = 200
-            if "Lusso" in UserData[Dictionary["UserInTipAcquisto"]]:
+            if LussoLbl in UserData[Dictionary["UserInTipAcquisto"]]:
                 IVA = 22
                 SpesaIVA = IVA*float(UserData[Dictionary["UserInPrezzo"]])*0.01
             else:

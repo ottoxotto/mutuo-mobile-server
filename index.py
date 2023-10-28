@@ -233,3 +233,4 @@ def returnDataGraphs():
 # Uncomment the lines below and start the debugger to run in localhost and debug it
 # if __name__ == "__main__":
     # app.run(use_debugger=False, use_reloader=False, passthrough_errors=True)
+    # app.run(host="192.168.0.88")
